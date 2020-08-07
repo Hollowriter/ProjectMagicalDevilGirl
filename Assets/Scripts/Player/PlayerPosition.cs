@@ -9,7 +9,13 @@ public class PlayerPosition : SingletonBase<PlayerPosition>
     protected override void SingletonAwake()
     {
         base.SingletonAwake();
+        DontDestroyOnLoad(gameObject);
         playerPosition = this.gameObject.GetComponent<Transform>().position;
+    }
+
+    private void Awake()
+    {
+        SingletonAwake();
     }
 
     public void SetPlayerPosition(Vector3 _playerPosition) 
