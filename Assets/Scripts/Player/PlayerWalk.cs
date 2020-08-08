@@ -6,13 +6,13 @@ public class PlayerWalk : SingletonBase<PlayerWalk>
 {
     [SerializeField]
     int characterSpeed;
-    Vector3 newPlayerPosition;
+    float newPlayerPositionX;
     bool direction;
 
     protected override void SingletonAwake()
     {
         base.SingletonAwake();
-        newPlayerPosition = PlayerPosition.instance.GetPlayerPosition();
+        newPlayerPositionX = PlayerPosition.instance.GetPlayerPositionX();
         direction = true;
     }
 
@@ -31,43 +31,33 @@ public class PlayerWalk : SingletonBase<PlayerWalk>
         return direction;
     }
 
-    void PressingRight()
+    public void WalkRight()
     {
-        newPlayerPosition.x += characterSpeed * Time.deltaTime;
+        newPlayerPositionX += characterSpeed * Time.deltaTime;
+        ApplyMovement();
         SetDirection(true);
     }
 
-    void PressingLeft()
+    public void WalkLeft()
     {
-        newPlayerPosition.x -= characterSpeed * Time.deltaTime;
+        newPlayerPositionX -= characterSpeed * Time.deltaTime;
+        ApplyMovement();
         SetDirection(false);
     }
 
     void ApplyMovement() 
     {
-        PlayerPosition.instance.SetPlayerPosition(newPlayerPosition);
+        PlayerPosition.instance.SetPlayerPositionX(newPlayerPositionX);
     }
 
-    void Movement()
+    void MovementUpdate()
     {
-        if (InputManager.instance.inputDetected())
-        {
-            newPlayerPosition = PlayerPosition.instance.GetPlayerPosition();
-            if (Input.GetKey(InputManager.instance.walkRight))
-            {
-                PressingRight();
-            }
-            if (Input.GetKey(InputManager.instance.walkLeft))
-            {
-                PressingLeft();
-            }
-            ApplyMovement();
-        }
+        newPlayerPositionX = PlayerPosition.instance.GetPlayerPositionX();
     }
 
     protected override void BehaveSingleton()
     {
-        Movement();
+        MovementUpdate();
     }
 
     private void Update()

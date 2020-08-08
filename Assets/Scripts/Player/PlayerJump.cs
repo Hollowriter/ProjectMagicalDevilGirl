@@ -11,12 +11,12 @@ public class PlayerJump : SingletonBase<PlayerJump>
     float jumpTime;
     float jumpTimer;
     bool firstJump;
-    Vector3 jumpPosition;
+    float jumpPosition;
 
     protected override void SingletonAwake()
     {
         base.SingletonAwake();
-        jumpPosition = PlayerPosition.instance.GetPlayerPosition();
+        jumpPosition = PlayerPosition.instance.GetPlayerPositionY();
         jumpTimer = 0;
         firstJump = false;
     }
@@ -26,15 +26,13 @@ public class PlayerJump : SingletonBase<PlayerJump>
         SingletonAwake();
     }
 
-    void Jump() 
+    public void Jump() 
     {
-        if (InputManager.instance.inputDetected()) 
+        if (jumpTimer < jumpTime && !firstJump) 
         {
-            if (Input.GetKey(InputManager.instance.jump) && jumpTimer < jumpTime && !firstJump) 
-            {
-                jumpPosition.y += jumpSpeed * Time.deltaTime;
-                jumpTimer += Time.deltaTime;
-            }
+            jumpPosition = PlayerPosition.instance.GetPlayerPositionY();
+            jumpPosition += jumpSpeed * Time.deltaTime;
+            jumpTimer += Time.deltaTime;
         }
     }
 
@@ -44,7 +42,8 @@ public class PlayerJump : SingletonBase<PlayerJump>
             jumpTimer >= jumpTime && !PlayerCollisions.instance.GetGrounded() ||
             firstJump == true && !PlayerCollisions.instance.GetGrounded()) 
         {
-            jumpPosition.y -= Gravity.instance.gravity * Time.deltaTime;
+            jumpPosition = PlayerPosition.instance.GetPlayerPositionY();
+            jumpPosition -= jumpSpeed * Time.deltaTime;
             firstJump = true;
         }
     }
@@ -60,13 +59,11 @@ public class PlayerJump : SingletonBase<PlayerJump>
 
     void ApplyJump() 
     {
-        PlayerPosition.instance.SetPlayerPosition(jumpPosition);
+        PlayerPosition.instance.SetPlayerPositionY(jumpPosition);
     }
 
     protected override void BehaveSingleton()
     {
-        jumpPosition = PlayerPosition.instance.GetPlayerPosition();
-        Jump();
         GravityActing();
         ApplyJump();
         ResetJump();
