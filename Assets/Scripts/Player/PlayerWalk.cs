@@ -33,7 +33,9 @@ public class PlayerWalk : SingletonBase<PlayerWalk>
 
     void WalkRight()
     {
-        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.WalkingRight)
+        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.WalkingRight ||
+            PlayerStates.instance.GetState() == (int)PlayerStates.States.JumpRight ||
+            PlayerStates.instance.GetState() == (int)PlayerStates.States.FallRight)
         {
             newPlayerPositionX += characterSpeed * Time.deltaTime;
             ApplyMovement();
@@ -43,7 +45,9 @@ public class PlayerWalk : SingletonBase<PlayerWalk>
 
     void WalkLeft()
     {
-        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.WalkingLeft)
+        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.WalkingLeft ||
+            PlayerStates.instance.GetState() == (int)PlayerStates.States.JumpLeft ||
+            PlayerStates.instance.GetState() == (int)PlayerStates.States.FallLeft)
         {
             newPlayerPositionX -= characterSpeed * Time.deltaTime;
             ApplyMovement();
