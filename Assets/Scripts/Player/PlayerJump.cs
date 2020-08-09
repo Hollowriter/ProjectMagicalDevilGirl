@@ -26,31 +26,36 @@ public class PlayerJump : SingletonBase<PlayerJump> // Nota: Hacer funciones par
         SingletonAwake();
     }
 
-    public void Jump() 
+    void Jump() 
     {
-        if (jumpTimer < jumpTime && !firstJump) 
+        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.JumpIdle ||
+            PlayerStates.instance.GetState() == (int)PlayerStates.States.JumpLeft ||
+            PlayerStates.instance.GetState() == (int)PlayerStates.States.JumpRight) 
         {
             jumpPosition = PlayerPosition.instance.GetPlayerPositionY();
             jumpPosition += jumpSpeed * Time.deltaTime;
             jumpTimer += Time.deltaTime;
+            if (jumpTimer >= jumpTime) 
+            {
+                PlayerStates.instance.SetEvent(PlayerStates.Events.FallJump);
+            }
         }
     }
 
     void GravityActing() 
     {
-        if (!Input.GetKey(InputManager.instance.jump) && !PlayerCollisions.instance.GetGrounded() ||
-            jumpTimer >= jumpTime && !PlayerCollisions.instance.GetGrounded() ||
-            firstJump == true && !PlayerCollisions.instance.GetGrounded()) 
+        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.FallIdle ||
+            PlayerStates.instance.GetState() == (int)PlayerStates.States.FallLeft ||
+            PlayerStates.instance.GetState() == (int)PlayerStates.States.FallRight) 
         {
             jumpPosition = PlayerPosition.instance.GetPlayerPositionY();
             jumpPosition -= jumpSpeed * Time.deltaTime;
-            firstJump = true;
         }
     }
 
     void ResetJump() 
     {
-        if (PlayerCollisions.instance.GetGrounded()) 
+        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.Idle) 
         {
             jumpTimer = 0;
             firstJump = false;
@@ -64,6 +69,7 @@ public class PlayerJump : SingletonBase<PlayerJump> // Nota: Hacer funciones par
 
     protected override void BehaveSingleton()
     {
+        Jump();
         GravityActing();
         ApplyJump();
         ResetJump();

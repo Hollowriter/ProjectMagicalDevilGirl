@@ -31,7 +31,7 @@ public class PlayerWalk : SingletonBase<PlayerWalk>
         return direction;
     }
 
-    public void WalkRight()
+    void WalkRight()
     {
         if (PlayerStates.instance.GetState() == (int)PlayerStates.States.WalkingRight)
         {
@@ -41,7 +41,7 @@ public class PlayerWalk : SingletonBase<PlayerWalk>
         }
     }
 
-    public void WalkLeft()
+    void WalkLeft()
     {
         if (PlayerStates.instance.GetState() == (int)PlayerStates.States.WalkingLeft)
         {

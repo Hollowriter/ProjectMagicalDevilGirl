@@ -13,7 +13,6 @@ public class PlayerController : SingletonBase<PlayerController>
     {
         if (Input.GetKey(InputManager.instance.walkLeft)) 
         {
-            //PlayerWalk.instance.WalkLeft();
             PlayerStates.instance.SetEvent(PlayerStates.Events.WalkLeft);
         }
     }
@@ -22,7 +21,6 @@ public class PlayerController : SingletonBase<PlayerController>
     {
         if (Input.GetKey(InputManager.instance.walkRight)) 
         {
-            // PlayerWalk.instance.WalkRight();
             PlayerStates.instance.SetEvent(PlayerStates.Events.WalkRight);
         }
     }
@@ -31,7 +29,6 @@ public class PlayerController : SingletonBase<PlayerController>
     {
         if (Input.GetKey(InputManager.instance.jump)) 
         {
-            // PlayerJump.instance.Jump();
             PlayerStates.instance.SetEvent(PlayerStates.Events.Jump);
         }
     }

@@ -77,6 +77,7 @@ public class PlayerStates : SingletonBase<PlayerStates>
         base.SingletonAwake();
         StartMachine();
         RelationsBegin();
+        SetEvent(Events.FallUngrounded);
     }
 
     private void Awake()

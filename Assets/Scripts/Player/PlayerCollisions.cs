@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class PlayerCollisions : SingletonBase<PlayerCollisions>
 {
-    bool grounded;
-
     protected override void SingletonAwake()
     {
         base.SingletonAwake();
-        grounded = false;
     }
 
     private void Awake()
@@ -17,16 +14,11 @@ public class PlayerCollisions : SingletonBase<PlayerCollisions>
         SingletonAwake();
     }
 
-    public bool GetGrounded() 
-    {
-        return grounded;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Floor") 
         {
-            grounded = true;
+            PlayerStates.instance.SetEvent(PlayerStates.Events.Landed);
         }
     }
 
@@ -34,7 +26,7 @@ public class PlayerCollisions : SingletonBase<PlayerCollisions>
     {
         if (collision.gameObject.tag == "Floor") 
         {
-            grounded = false;
+            PlayerStates.instance.SetEvent(PlayerStates.Events.FallUngrounded);
         }
     }
 }
