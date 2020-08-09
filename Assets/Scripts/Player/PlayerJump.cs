@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerJump : SingletonBase<PlayerJump> // Nota: Hacer funciones para permitir saltos en parabola si hay una tecla apretada al hacer el salto.
-{ // Y que la direccion no se modifique por input del jugador si este esta aun en el aire.
+public class PlayerJump : SingletonBase<PlayerJump>
+{
     [SerializeField]
     int jumpSpeed;
     [SerializeField]
