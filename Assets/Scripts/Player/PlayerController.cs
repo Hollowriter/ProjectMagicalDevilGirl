@@ -13,7 +13,8 @@ public class PlayerController : SingletonBase<PlayerController>
     {
         if (Input.GetKey(InputManager.instance.walkLeft)) 
         {
-            PlayerWalk.instance.WalkLeft();
+            //PlayerWalk.instance.WalkLeft();
+            PlayerStates.instance.SetEvent(PlayerStates.Events.WalkLeft);
         }
     }
 
@@ -21,7 +22,8 @@ public class PlayerController : SingletonBase<PlayerController>
     {
         if (Input.GetKey(InputManager.instance.walkRight)) 
         {
-            PlayerWalk.instance.WalkRight();
+            // PlayerWalk.instance.WalkRight();
+            PlayerStates.instance.SetEvent(PlayerStates.Events.WalkRight);
         }
     }
 
@@ -29,7 +31,16 @@ public class PlayerController : SingletonBase<PlayerController>
     {
         if (Input.GetKey(InputManager.instance.jump)) 
         {
-            PlayerJump.instance.Jump();
+            // PlayerJump.instance.Jump();
+            PlayerStates.instance.SetEvent(PlayerStates.Events.Jump);
+        }
+    }
+
+    void StopPressing() 
+    {
+        if (Input.GetKeyUp(InputManager.instance.walkLeft) || Input.GetKeyUp(InputManager.instance.walkRight)) 
+        {
+            PlayerStates.instance.SetEvent(PlayerStates.Events.Stop);
         }
     }
 
@@ -41,6 +52,7 @@ public class PlayerController : SingletonBase<PlayerController>
             PressedRight();
             PressedJump();
         }
+        StopPressing();
     }
 
     protected override void BehaveSingleton()

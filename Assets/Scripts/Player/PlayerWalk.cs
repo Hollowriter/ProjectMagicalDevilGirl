@@ -33,16 +33,22 @@ public class PlayerWalk : SingletonBase<PlayerWalk>
 
     public void WalkRight()
     {
-        newPlayerPositionX += characterSpeed * Time.deltaTime;
-        ApplyMovement();
-        SetDirection(true);
+        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.WalkingRight)
+        {
+            newPlayerPositionX += characterSpeed * Time.deltaTime;
+            ApplyMovement();
+            SetDirection(true);
+        }
     }
 
     public void WalkLeft()
     {
-        newPlayerPositionX -= characterSpeed * Time.deltaTime;
-        ApplyMovement();
-        SetDirection(false);
+        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.WalkingLeft)
+        {
+            newPlayerPositionX -= characterSpeed * Time.deltaTime;
+            ApplyMovement();
+            SetDirection(false);
+        }
     }
 
     void ApplyMovement() 
@@ -53,6 +59,8 @@ public class PlayerWalk : SingletonBase<PlayerWalk>
     void MovementUpdate()
     {
         newPlayerPositionX = PlayerPosition.instance.GetPlayerPositionX();
+        WalkLeft();
+        WalkRight();
     }
 
     protected override void BehaveSingleton()
