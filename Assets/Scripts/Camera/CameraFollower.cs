@@ -9,6 +9,8 @@ public class CameraFollower : SingletonBase<CameraFollower>
     float camHorzExtent;
     float leftConstraint;
     float rightConstraint;
+    float topConstraint;
+    float bottomConstraint;
 
     void CalculateCameraLimits()
     {
@@ -16,6 +18,8 @@ public class CameraFollower : SingletonBase<CameraFollower>
         camHorzExtent = this.gameObject.GetComponent<Camera>().aspect * camVertExtent;
         leftConstraint = AreaConstraints.instance.LeftStageLimit + camHorzExtent;
         rightConstraint = AreaConstraints.instance.RightStageLimit - camHorzExtent;
+        topConstraint = AreaConstraints.instance.TopStageLimit - camVertExtent;
+        bottomConstraint = AreaConstraints.instance.BottomStageLimit - camVertExtent;
     }
 
     protected override void SingletonAwake()
@@ -35,7 +39,7 @@ public class CameraFollower : SingletonBase<CameraFollower>
         if (Input.GetKey(InputManager.instance.walkLeft) || Input.GetKey(InputManager.instance.walkRight))
         {
             moveVector.x = Mathf.Clamp(PlayerPosition.instance.transform.position.x, leftConstraint, rightConstraint);
-            moveVector.y = this.gameObject.transform.position.y;
+            moveVector.y = Mathf.Clamp(PlayerPosition.instance.transform.position.y, bottomConstraint, topConstraint);
             moveVector.z = this.gameObject.transform.position.z;
             transform.position = moveVector;
         }

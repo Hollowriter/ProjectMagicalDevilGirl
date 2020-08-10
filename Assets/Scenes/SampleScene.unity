@@ -428,6 +428,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LeftStageLimit: -100
   RightStageLimit: 100
+  TopStageLimit: 10
+  BottomStageLimit: -100
 --- !u!1 &1018039072
 GameObject:
   m_ObjectHideFlags: 0
