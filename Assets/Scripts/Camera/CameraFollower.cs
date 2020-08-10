@@ -36,13 +36,10 @@ public class CameraFollower : SingletonBase<CameraFollower>
 
     void Follow()
     {
-        if (Input.GetKey(InputManager.instance.walkLeft) || Input.GetKey(InputManager.instance.walkRight))
-        {
-            moveVector.x = Mathf.Clamp(PlayerPosition.instance.transform.position.x, leftConstraint, rightConstraint);
-            moveVector.y = Mathf.Clamp(PlayerPosition.instance.transform.position.y, bottomConstraint, topConstraint);
-            moveVector.z = this.gameObject.transform.position.z;
-            transform.position = moveVector;
-        }
+        moveVector.x = Mathf.Clamp(PlayerPosition.instance.transform.position.x, leftConstraint, rightConstraint);
+        moveVector.y = Mathf.Clamp(PlayerPosition.instance.transform.position.y, bottomConstraint, topConstraint);
+        moveVector.z = this.gameObject.transform.position.z;
+        transform.position = moveVector;
     }
 
     protected override void BehaveSingleton()
