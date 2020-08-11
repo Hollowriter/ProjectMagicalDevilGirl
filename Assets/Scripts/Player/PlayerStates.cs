@@ -17,7 +17,9 @@ public class PlayerStates : SingletonBase<PlayerStates>
         JumpLeft,
         FallIdle,
         FallRight,
-        FallLeft
+        FallLeft,
+        Punching,
+        ConnectedPunching
     }
 
     public enum Events 
@@ -28,13 +30,16 @@ public class PlayerStates : SingletonBase<PlayerStates>
         Jump,
         FallJump,
         FallUngrounded,
-        Landed
+        Landed,
+        Punch,
+        LandPunch,
+        StopPunch
     }
 
     void StartMachine() 
     {
         stateMachine = new StateMachine();
-        stateMachine.Init(9, 7);
+        stateMachine.Init(11, 10);
     }
 
     void WalkRelations() 
@@ -65,11 +70,23 @@ public class PlayerStates : SingletonBase<PlayerStates>
         stateMachine.SetRelation((int)States.FallRight, (int)Events.Landed, (int)States.Idle);
     }
 
+    void AttackRelations() 
+    {
+        stateMachine.SetRelation((int)States.Idle, (int)Events.Punch, (int)States.Punching);
+        stateMachine.SetRelation((int)States.WalkingLeft, (int)Events.Punch, (int)States.Punching);
+        stateMachine.SetRelation((int)States.WalkingRight, (int)Events.Punch, (int)States.Punching);
+        stateMachine.SetRelation((int)States.Punching, (int)Events.LandPunch, (int)States.ConnectedPunching);
+        stateMachine.SetRelation((int)States.ConnectedPunching, (int)Events.Punch, (int)States.Punching);
+        stateMachine.SetRelation((int)States.Punching, (int)Events.StopPunch, (int)States.Idle);
+        stateMachine.SetRelation((int)States.ConnectedPunching, (int)Events.StopPunch, (int)States.Idle);
+    }
+
     void RelationsBegin() 
     {
         WalkRelations();
         JumpRelations();
         FallRelations();
+        AttackRelations();
     }
 
     protected override void SingletonAwake()
