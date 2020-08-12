@@ -33,6 +33,14 @@ public class PlayerController : SingletonBase<PlayerController>
         }
     }
 
+    void PressedAttack() 
+    {
+        if (Input.GetKey(InputManager.instance.attack)) 
+        {
+            PlayerStates.instance.SetEvent(PlayerStates.Events.Punch);
+        }
+    }
+
     void StopPressing() 
     {
         if (Input.GetKeyUp(InputManager.instance.walkLeft) || Input.GetKeyUp(InputManager.instance.walkRight)) 
@@ -48,6 +56,7 @@ public class PlayerController : SingletonBase<PlayerController>
             PressedLeft();
             PressedRight();
             PressedJump();
+            PressedAttack();
         }
         StopPressing();
     }
