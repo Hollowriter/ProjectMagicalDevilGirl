@@ -4,21 +4,17 @@ using UnityEngine;
 
 public class PlayerAttack : SingletonBase<PlayerAttack>
 {
-    // Esta clase va a tener que ser refactoreada si o si.
-    /*[SerializeField]
-    GameObject attackBox;*/ // Crear un script singleton aparte despues.
-    Vector3 attackBoxVector; // Fijarme si lo puedo poner en otra funcion o script.
+    Vector3 attackBoxVector;
     public float attackHorizontalDifference;
     public float attackVerticalDifference;
-    public float attackDuration; // Pendiente de modificar.
-    float attackTime; // Modificar, despues va a depender de la animacion.
-    int directionModifier; // Fijarme si lo puedo poner en otra funcion o script.
+    public float attackDuration;
+    float attackTime;
+    int directionModifier;
 
     protected override void SingletonAwake()
     {
         base.SingletonAwake();
         attackTime = 0;
-        // attackBox.SetActive(false);
         attackBoxVector = PlayerPosition.instance.GetPlayerPosition();
         directionModifier = 1;
         this.gameObject.SetActive(false);
@@ -41,25 +37,22 @@ public class PlayerAttack : SingletonBase<PlayerAttack>
 
     void Punch() 
     {
-        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.Punching)
+        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.Punching || PlayerStates.instance.GetState() == (int)PlayerStates.States.ConnectedPunching)
         {
-            // attackBox.SetActive(true);
             attackBoxVector.x = PlayerPosition.instance.GetPlayerPosition().x + attackHorizontalDifference * directionModifier;
             attackBoxVector.y = PlayerPosition.instance.GetPlayerPosition().y + attackVerticalDifference;
-            // attackBox.transform.position = attackBoxVector;
             this.gameObject.transform.position = attackBoxVector;
         }
     }
 
     void CheckAttackTime() 
     {
-        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.Punching)
+        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.Punching || PlayerStates.instance.GetState() == (int)PlayerStates.States.ConnectedPunching)
         {
             attackTime += Time.deltaTime;
             if (attackTime >= attackDuration) 
             {
                 attackTime = 0;
-                // attackBox.SetActive(false);
                 PlayerStates.instance.SetEvent(PlayerStates.Events.StopPunch);
                 this.gameObject.SetActive(false);
             }
