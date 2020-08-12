@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerAttack : SingletonBase<PlayerAttack>
 {
     // Esta clase va a tener que ser refactoreada si o si.
-    [SerializeField]
-    GameObject attackBox; // Crear un script singleton aparte despues.
+    /*[SerializeField]
+    GameObject attackBox;*/ // Crear un script singleton aparte despues.
     Vector3 attackBoxVector; // Fijarme si lo puedo poner en otra funcion o script.
     public float attackHorizontalDifference;
     public float attackVerticalDifference;
@@ -18,9 +18,10 @@ public class PlayerAttack : SingletonBase<PlayerAttack>
     {
         base.SingletonAwake();
         attackTime = 0;
-        attackBox.SetActive(false);
+        // attackBox.SetActive(false);
         attackBoxVector = PlayerPosition.instance.GetPlayerPosition();
         directionModifier = 1;
+        this.gameObject.SetActive(false);
     }
 
     private void Awake()
@@ -42,10 +43,11 @@ public class PlayerAttack : SingletonBase<PlayerAttack>
     {
         if (PlayerStates.instance.GetState() == (int)PlayerStates.States.Punching)
         {
-            attackBox.SetActive(true);
+            // attackBox.SetActive(true);
             attackBoxVector.x = PlayerPosition.instance.GetPlayerPosition().x + attackHorizontalDifference * directionModifier;
             attackBoxVector.y = PlayerPosition.instance.GetPlayerPosition().y + attackVerticalDifference;
-            attackBox.transform.position = attackBoxVector;
+            // attackBox.transform.position = attackBoxVector;
+            this.gameObject.transform.position = attackBoxVector;
         }
     }
 
@@ -57,8 +59,9 @@ public class PlayerAttack : SingletonBase<PlayerAttack>
             if (attackTime >= attackDuration) 
             {
                 attackTime = 0;
-                attackBox.SetActive(false);
+                // attackBox.SetActive(false);
                 PlayerStates.instance.SetEvent(PlayerStates.Events.StopPunch);
+                this.gameObject.SetActive(false);
             }
         }
     }

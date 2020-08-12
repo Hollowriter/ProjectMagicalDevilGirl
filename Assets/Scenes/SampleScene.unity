@@ -728,13 +728,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1176775860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b6bf00e64547134483b0e74b6d5249c, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c263c06cfc335b4fa469812b12138ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackBox: {fileID: 2131475527}
-  attackHorizontalDifference: 1
-  attackVerticalDifference: 0.5
-  attackDuration: 0.5
 --- !u!1 &1293534559
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,6 +956,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2131475528}
   - component: {fileID: 2131475529}
+  - component: {fileID: 2131475530}
   m_Layer: 0
   m_Name: PlayerPunch
   m_TagString: PlayerAttack
@@ -1007,3 +1005,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.800791, y: 1.8185866}
   m_EdgeRadius: 0
+--- !u!114 &2131475530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131475527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b6bf00e64547134483b0e74b6d5249c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackHorizontalDifference: 2
+  attackVerticalDifference: 1
+  attackDuration: 0.5
