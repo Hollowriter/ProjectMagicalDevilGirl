@@ -54,6 +54,7 @@ public class PlayerAttack : SingletonBase<PlayerAttack>
             {
                 attackTime = 0;
                 PlayerStates.instance.SetEvent(PlayerStates.Events.StopPunch);
+                PlayerCombo.instance.SetEvent(PlayerCombo.ComboEvents.WaitCombo);
                 this.gameObject.SetActive(false);
             }
         }

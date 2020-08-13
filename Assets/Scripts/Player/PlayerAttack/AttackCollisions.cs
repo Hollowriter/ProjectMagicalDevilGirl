@@ -15,7 +15,8 @@ public class AttackCollisions : SingletonBase<AttackCollisions>
         {
             if (PlayerStates.instance.GetState() == (int)PlayerStates.States.Punching) 
             {
-                PlayerStates.instance.SetEvent(PlayerStates.Events.LandPunch); // Pendientes de hacer los combos.
+                PlayerStates.instance.SetEvent(PlayerStates.Events.LandPunch);
+                PlayerCombo.instance.SetEvent(PlayerCombo.ComboEvents.LandPunch);
             }
         }
     }

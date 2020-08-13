@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerStates : SingletonBase<PlayerStates>
 {
     StateMachine stateMachine;
-    int state;
 
     public enum States 
     {
