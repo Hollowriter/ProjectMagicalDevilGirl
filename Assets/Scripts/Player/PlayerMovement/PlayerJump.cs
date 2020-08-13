@@ -46,7 +46,10 @@ public class PlayerJump : SingletonBase<PlayerJump>
     {
         if (PlayerStates.instance.GetState() == (int)PlayerStates.States.FallIdle ||
             PlayerStates.instance.GetState() == (int)PlayerStates.States.FallLeft ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.FallRight) 
+            PlayerStates.instance.GetState() == (int)PlayerStates.States.FallRight ||
+            PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickIdle ||
+            PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickLeft ||
+            PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickRight) 
         {
             jumpPosition = PlayerPosition.instance.GetPlayerPositionY();
             jumpPosition -= jumpSpeed * Time.deltaTime;

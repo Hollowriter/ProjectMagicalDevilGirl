@@ -35,7 +35,8 @@ public class PlayerWalk : SingletonBase<PlayerWalk>
     {
         if (PlayerStates.instance.GetState() == (int)PlayerStates.States.WalkingRight ||
             PlayerStates.instance.GetState() == (int)PlayerStates.States.JumpRight ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.FallRight)
+            PlayerStates.instance.GetState() == (int)PlayerStates.States.FallRight ||
+            PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickRight)
         {
             newPlayerPositionX += characterSpeed * Time.deltaTime;
             ApplyMovement();
@@ -47,7 +48,8 @@ public class PlayerWalk : SingletonBase<PlayerWalk>
     {
         if (PlayerStates.instance.GetState() == (int)PlayerStates.States.WalkingLeft ||
             PlayerStates.instance.GetState() == (int)PlayerStates.States.JumpLeft ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.FallLeft)
+            PlayerStates.instance.GetState() == (int)PlayerStates.States.FallLeft ||
+            PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickLeft)
         {
             newPlayerPositionX -= characterSpeed * Time.deltaTime;
             ApplyMovement();

@@ -14,11 +14,12 @@ public class PlayerCollisions : SingletonBase<PlayerCollisions>
         SingletonAwake();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Floor") 
         {
             PlayerStates.instance.SetEvent(PlayerStates.Events.Landed);
+            PlayerCombo.instance.SetEvent(PlayerCombo.ComboEvents.Grounded);
         }
     }
 
@@ -27,6 +28,7 @@ public class PlayerCollisions : SingletonBase<PlayerCollisions>
         if (collision.gameObject.tag == "Floor") 
         {
             PlayerStates.instance.SetEvent(PlayerStates.Events.FallUngrounded);
+            PlayerCombo.instance.SetEvent(PlayerCombo.ComboEvents.OnAir);
         }
     }
 }

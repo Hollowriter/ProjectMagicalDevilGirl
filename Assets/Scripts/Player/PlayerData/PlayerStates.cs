@@ -17,6 +17,9 @@ public class PlayerStates : SingletonBase<PlayerStates>
         FallIdle,
         FallRight,
         FallLeft,
+        AirKickIdle,
+        AirKickRight,
+        AirKickLeft,
         Punching,
         ConnectedPunching
     }
@@ -38,7 +41,7 @@ public class PlayerStates : SingletonBase<PlayerStates>
     void StartMachine() 
     {
         stateMachine = new StateMachine();
-        stateMachine.Init(11, 10);
+        stateMachine.Init(14, 10);
     }
 
     void WalkRelations() 
@@ -67,6 +70,9 @@ public class PlayerStates : SingletonBase<PlayerStates>
         stateMachine.SetRelation((int)States.FallIdle, (int)Events.Landed, (int)States.Idle);
         stateMachine.SetRelation((int)States.FallLeft, (int)Events.Landed, (int)States.Idle);
         stateMachine.SetRelation((int)States.FallRight, (int)Events.Landed, (int)States.Idle);
+        stateMachine.SetRelation((int)States.AirKickIdle, (int)Events.Landed, (int)States.Idle);
+        stateMachine.SetRelation((int)States.AirKickLeft, (int)Events.Landed, (int)States.Idle);
+        stateMachine.SetRelation((int)States.AirKickRight, (int)Events.Landed, (int)States.Idle);
     }
 
     void AttackRelations() 
@@ -76,6 +82,9 @@ public class PlayerStates : SingletonBase<PlayerStates>
         stateMachine.SetRelation((int)States.WalkingRight, (int)Events.Punch, (int)States.Punching);
         stateMachine.SetRelation((int)States.Punching, (int)Events.LandPunch, (int)States.ConnectedPunching);
         stateMachine.SetRelation((int)States.ConnectedPunching, (int)Events.Punch, (int)States.Punching);
+        stateMachine.SetRelation((int)States.JumpIdle, (int)Events.Punch, (int)States.AirKickIdle);
+        stateMachine.SetRelation((int)States.JumpLeft, (int)Events.Punch, (int)States.AirKickLeft);
+        stateMachine.SetRelation((int)States.JumpRight, (int)Events.Punch, (int)States.AirKickRight);
         stateMachine.SetRelation((int)States.Punching, (int)Events.StopPunch, (int)States.Idle);
         stateMachine.SetRelation((int)States.ConnectedPunching, (int)Events.StopPunch, (int)States.Idle);
     }

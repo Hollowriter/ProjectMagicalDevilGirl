@@ -45,6 +45,18 @@ public class PlayerAttack : SingletonBase<PlayerAttack>
         }
     }
 
+    void AirKick() 
+    {
+        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickIdle 
+            || PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickLeft 
+            || PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickRight) 
+        {
+            attackBoxVector.x = PlayerPosition.instance.GetPlayerPosition().x + attackHorizontalDifference * directionModifier;
+            attackBoxVector.y = PlayerPosition.instance.GetPlayerPosition().y - attackVerticalDifference;
+            this.gameObject.transform.position = attackBoxVector;
+        }
+    }
+
     void CheckAttackTime() 
     {
         if (PlayerStates.instance.GetState() == (int)PlayerStates.States.Punching || PlayerStates.instance.GetState() == (int)PlayerStates.States.ConnectedPunching)
@@ -55,8 +67,19 @@ public class PlayerAttack : SingletonBase<PlayerAttack>
                 attackTime = 0;
                 PlayerStates.instance.SetEvent(PlayerStates.Events.StopPunch);
                 PlayerCombo.instance.SetEvent(PlayerCombo.ComboEvents.WaitCombo);
-                this.gameObject.SetActive(false);
             }
+        }
+    }
+
+    void CheckAttackActivation() 
+    {
+        if (!(PlayerStates.instance.GetState() == (int)PlayerStates.States.Punching) && 
+            !(PlayerStates.instance.GetState() == (int)PlayerStates.States.ConnectedPunching) &&
+            !(PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickIdle) &&
+            !(PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickLeft) &&
+            !(PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickRight)) 
+        {
+            this.gameObject.SetActive(false);
         }
     }
 
@@ -65,6 +88,7 @@ public class PlayerAttack : SingletonBase<PlayerAttack>
         CheckDirection();
         Punch();
         CheckAttackTime();
+        CheckAttackActivation();
     }
 
     private void Update()

@@ -9,6 +9,7 @@ public class PlayerCombo : SingletonBase<PlayerCombo>
     public enum ComboStates 
     {
         None,
+        Air,
         FirstPunch,
         WaitSecondPunch,
         SecondPunch,
@@ -20,13 +21,15 @@ public class PlayerCombo : SingletonBase<PlayerCombo>
     {
         LandPunch,
         WaitCombo,
+        OnAir,
+        Grounded,
         StopCombo
     }
 
     void StartMachine() 
     {
         comboMachine = new StateMachine();
-        comboMachine.Init(6, 3);
+        comboMachine.Init(7, 5);
     }
 
     void FirstComboRelations() 
@@ -51,6 +54,12 @@ public class PlayerCombo : SingletonBase<PlayerCombo>
         comboMachine.SetRelation((int)ComboStates.WaitThirdPunch, (int)ComboEvents.StopCombo, (int)ComboStates.None);
     }
 
+    void AirRelations() 
+    {
+        comboMachine.SetRelation((int)ComboStates.None, (int)ComboEvents.OnAir, (int)ComboStates.Air);
+        comboMachine.SetRelation((int)ComboStates.Air, (int)ComboEvents.Grounded, (int)ComboStates.None);
+    }
+
     void EndCombo() 
     {
         comboMachine.SetRelation((int)ComboStates.ThirdPunch, (int)ComboEvents.LandPunch, (int)ComboStates.None);
@@ -61,6 +70,7 @@ public class PlayerCombo : SingletonBase<PlayerCombo>
         FirstComboRelations();
         WaitCombo();
         CancelCombo();
+        AirRelations();
         EndCombo();
     }
 
