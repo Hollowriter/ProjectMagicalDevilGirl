@@ -85,6 +85,9 @@ public class PlayerStates : SingletonBase<PlayerStates>
         stateMachine.SetRelation((int)States.JumpIdle, (int)Events.Punch, (int)States.AirKickIdle);
         stateMachine.SetRelation((int)States.JumpLeft, (int)Events.Punch, (int)States.AirKickLeft);
         stateMachine.SetRelation((int)States.JumpRight, (int)Events.Punch, (int)States.AirKickRight);
+        stateMachine.SetRelation((int)States.FallIdle, (int)Events.Punch, (int)States.AirKickIdle);
+        stateMachine.SetRelation((int)States.FallLeft, (int)Events.Punch, (int)States.AirKickLeft);
+        stateMachine.SetRelation((int)States.FallRight, (int)Events.Punch, (int)States.AirKickRight);
         stateMachine.SetRelation((int)States.Punching, (int)Events.StopPunch, (int)States.Idle);
         stateMachine.SetRelation((int)States.ConnectedPunching, (int)Events.StopPunch, (int)States.Idle);
     }
