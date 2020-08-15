@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class PlayerController : SingletonBase<PlayerController>
 {
+    bool attackPressed;
+    bool jumpPressed;
+
+    protected override void SingletonAwake()
+    {
+        base.SingletonAwake();
+        attackPressed = false;
+        jumpPressed = false;
+    }
+
     private void Awake()
     {
         SingletonAwake();
@@ -27,17 +37,19 @@ public class PlayerController : SingletonBase<PlayerController>
 
     void PressedJump() 
     {
-        if (Input.GetKey(InputManager.instance.jump)) 
+        if (Input.GetKey(InputManager.instance.jump) && !jumpPressed) 
         {
             PlayerStates.instance.SetEvent(PlayerStates.Events.Jump);
+            jumpPressed = true;
         }
     }
 
     void PressedAttack() 
     {
-        if (Input.GetKey(InputManager.instance.attack)) 
+        if (Input.GetKey(InputManager.instance.attack) && !attackPressed) 
         {
             PlayerStates.instance.SetEvent(PlayerStates.Events.Punch);
+            attackPressed = true;
         }
     }
 
@@ -46,6 +58,14 @@ public class PlayerController : SingletonBase<PlayerController>
         if (Input.GetKeyUp(InputManager.instance.walkLeft) || Input.GetKeyUp(InputManager.instance.walkRight)) 
         {
             PlayerStates.instance.SetEvent(PlayerStates.Events.Stop);
+        }
+        if (Input.GetKeyUp(InputManager.instance.attack)) 
+        {
+            attackPressed = false;
+        }
+        if (Input.GetKeyUp(InputManager.instance.jump)) 
+        {
+            jumpPressed = false;
         }
     }
 
