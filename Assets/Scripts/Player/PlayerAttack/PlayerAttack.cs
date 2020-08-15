@@ -87,6 +87,7 @@ public class PlayerAttack : SingletonBase<PlayerAttack>
     {
         CheckDirection();
         Punch();
+        AirKick();
         CheckAttackTime();
         CheckAttackActivation();
     }
