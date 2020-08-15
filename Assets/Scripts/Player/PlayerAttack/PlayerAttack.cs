@@ -7,7 +7,7 @@ public class PlayerAttack : SingletonBase<PlayerAttack>
     Vector3 attackBoxVector;
     public float attackHorizontalDifference;
     public float attackVerticalDifference;
-    public float attackDuration;
+    public float attackDuration; // Esto va a ser reemplazado por animacion tarde o temprano.
     float attackTime;
     int directionModifier;
 
