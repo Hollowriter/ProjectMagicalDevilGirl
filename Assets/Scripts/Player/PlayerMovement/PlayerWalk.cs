@@ -33,10 +33,10 @@ public class PlayerWalk : SingletonBase<PlayerWalk>
 
     void WalkRight()
     {
-        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.WalkingRight ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.JumpRight ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.FallRight ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickRight)
+        if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.WalkingRight ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.JumpRight ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.FallRight ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickRight)
         {
             newPlayerPositionX += characterSpeed * Time.deltaTime;
             ApplyMovement();
@@ -46,10 +46,10 @@ public class PlayerWalk : SingletonBase<PlayerWalk>
 
     void WalkLeft()
     {
-        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.WalkingLeft ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.JumpLeft ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.FallLeft ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickLeft)
+        if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.WalkingLeft ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.JumpLeft ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.FallLeft ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickLeft)
         {
             newPlayerPositionX -= characterSpeed * Time.deltaTime;
             ApplyMovement();

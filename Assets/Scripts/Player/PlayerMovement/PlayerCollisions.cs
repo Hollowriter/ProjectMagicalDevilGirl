@@ -18,8 +18,8 @@ public class PlayerCollisions : SingletonBase<PlayerCollisions>
     {
         if (collision.gameObject.tag == "Floor") 
         {
-            PlayerStates.instance.SetEvent(PlayerStates.Events.Landed);
-            PlayerCombo.instance.SetEvent(PlayerCombo.ComboEvents.Grounded);
+            PlayerMachines.instance.GetPlayerStateMachine().SetEvent((int)PlayerStates.Events.Landed);
+            PlayerMachines.instance.GetComboMachine().SetEvent((int)PlayerCombo.ComboEvents.Grounded);
         }
     }
 
@@ -27,8 +27,8 @@ public class PlayerCollisions : SingletonBase<PlayerCollisions>
     {
         if (collision.gameObject.tag == "Floor") 
         {
-            PlayerStates.instance.SetEvent(PlayerStates.Events.FallUngrounded);
-            PlayerCombo.instance.SetEvent(PlayerCombo.ComboEvents.OnAir);
+            PlayerMachines.instance.GetPlayerStateMachine().SetEvent((int)PlayerStates.Events.FallUngrounded);
+            PlayerMachines.instance.GetComboMachine().SetEvent((int)PlayerCombo.ComboEvents.OnAir);
         }
     }
 }

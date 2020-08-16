@@ -20,18 +20,18 @@ public class ComboTimer : SingletonBase<ComboTimer>
 
     void TimeIsTicking() 
     {
-        if (PlayerCombo.instance.GetState() == (int)PlayerCombo.ComboStates.None) 
+        if (PlayerMachines.instance.GetComboMachine().GetState() == (int)PlayerCombo.ComboStates.None) 
         {
             timer = 0;
             return;
         }
-        if (PlayerCombo.instance.GetState() == (int)PlayerCombo.ComboStates.WaitSecondPunch ||
-            PlayerCombo.instance.GetState() == (int)PlayerCombo.ComboStates.WaitThirdPunch) 
+        if (PlayerMachines.instance.GetComboMachine().GetState() == (int)PlayerCombo.ComboStates.WaitSecondPunch ||
+            PlayerMachines.instance.GetComboMachine().GetState() == (int)PlayerCombo.ComboStates.WaitThirdPunch) 
         {
             timer += Time.deltaTime;
             if (timer >= maxComboTime) 
             {
-                PlayerCombo.instance.SetEvent(PlayerCombo.ComboEvents.StopCombo);
+                PlayerMachines.instance.GetComboMachine().SetEvent((int)PlayerCombo.ComboEvents.StopCombo);
             }
         }
     }

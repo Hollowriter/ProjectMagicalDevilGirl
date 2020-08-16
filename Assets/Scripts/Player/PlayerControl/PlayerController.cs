@@ -23,7 +23,7 @@ public class PlayerController : SingletonBase<PlayerController>
     {
         if (Input.GetKey(InputManager.instance.walkLeft)) 
         {
-            PlayerStates.instance.SetEvent(PlayerStates.Events.WalkLeft);
+            PlayerMachines.instance.GetPlayerStateMachine().SetEvent((int)PlayerStates.Events.WalkLeft);
         }
     }
 
@@ -31,7 +31,7 @@ public class PlayerController : SingletonBase<PlayerController>
     {
         if (Input.GetKey(InputManager.instance.walkRight)) 
         {
-            PlayerStates.instance.SetEvent(PlayerStates.Events.WalkRight);
+            PlayerMachines.instance.GetPlayerStateMachine().SetEvent((int)PlayerStates.Events.WalkRight);
         }
     }
 
@@ -39,7 +39,7 @@ public class PlayerController : SingletonBase<PlayerController>
     {
         if (Input.GetKey(InputManager.instance.jump) && !jumpPressed) 
         {
-            PlayerStates.instance.SetEvent(PlayerStates.Events.Jump);
+            PlayerMachines.instance.GetPlayerStateMachine().SetEvent((int)PlayerStates.Events.Jump);
             jumpPressed = true;
         }
     }
@@ -48,7 +48,7 @@ public class PlayerController : SingletonBase<PlayerController>
     {
         if (Input.GetKey(InputManager.instance.attack) && !attackPressed) 
         {
-            PlayerStates.instance.SetEvent(PlayerStates.Events.Punch);
+            PlayerMachines.instance.GetPlayerStateMachine().SetEvent((int)PlayerStates.Events.Punch);
             attackPressed = true;
         }
     }
@@ -57,7 +57,7 @@ public class PlayerController : SingletonBase<PlayerController>
     {
         if (Input.GetKeyUp(InputManager.instance.walkLeft) || Input.GetKeyUp(InputManager.instance.walkRight)) 
         {
-            PlayerStates.instance.SetEvent(PlayerStates.Events.Stop);
+            PlayerMachines.instance.GetPlayerStateMachine().SetEvent((int)PlayerStates.Events.Stop);
         }
         if (Input.GetKeyUp(InputManager.instance.attack)) 
         {

@@ -15,10 +15,10 @@ public class PlayerBoxes : SingletonBase<PlayerBoxes>
 
     void AttackBox() 
     {
-        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.Punching ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickIdle ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickLeft ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickRight) 
+        if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.Punching ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickIdle ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickLeft ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickRight) 
         {
             attackBox.SetActive(true);
         }

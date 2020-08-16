@@ -28,28 +28,28 @@ public class PlayerJump : SingletonBase<PlayerJump>
 
     void Jump() 
     {
-        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.JumpIdle ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.JumpLeft ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.JumpRight) 
+        if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.JumpIdle ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.JumpLeft ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.JumpRight) 
         {
             jumpPosition = PlayerPosition.instance.GetPlayerPositionY();
             jumpPosition += jumpSpeed * Time.deltaTime;
             jumpTimer += Time.deltaTime;
             if (jumpTimer >= jumpTime) 
             {
-                PlayerStates.instance.SetEvent(PlayerStates.Events.FallJump);
+                PlayerMachines.instance.GetPlayerStateMachine().SetEvent((int)PlayerStates.Events.FallJump);
             }
         }
     }
 
     void GravityActing() 
     {
-        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.FallIdle ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.FallLeft ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.FallRight ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickIdle ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickLeft ||
-            PlayerStates.instance.GetState() == (int)PlayerStates.States.AirKickRight) 
+        if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.FallIdle ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.FallLeft ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.FallRight ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickIdle ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickLeft ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickRight) 
         {
             jumpPosition = PlayerPosition.instance.GetPlayerPositionY();
             jumpPosition -= jumpSpeed * Time.deltaTime;
@@ -58,7 +58,7 @@ public class PlayerJump : SingletonBase<PlayerJump>
 
     void ResetJump() 
     {
-        if (PlayerStates.instance.GetState() == (int)PlayerStates.States.Idle) 
+        if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.Idle) 
         {
             jumpTimer = 0;
             firstJump = false;

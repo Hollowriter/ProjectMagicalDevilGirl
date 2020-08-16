@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStates : SingletonBase<PlayerStates>
+public class PlayerStates : BasicStates
 {
-    StateMachine stateMachine;
-
     public enum States 
     {
         Idle,
@@ -92,7 +90,7 @@ public class PlayerStates : SingletonBase<PlayerStates>
         stateMachine.SetRelation((int)States.ConnectedPunching, (int)Events.StopPunch, (int)States.Idle);
     }
 
-    void RelationsBegin() 
+    protected override void RelationsBegin() 
     {
         WalkRelations();
         JumpRelations();
@@ -100,26 +98,10 @@ public class PlayerStates : SingletonBase<PlayerStates>
         AttackRelations();
     }
 
-    protected override void SingletonAwake()
-    {
-        base.SingletonAwake();
-        StartMachine();
-        RelationsBegin();
-        SetEvent(Events.FallUngrounded);
-    }
-
     private void Awake()
     {
-        SingletonAwake();
-    }
-
-    public void SetEvent(Events theEvent) 
-    {
-        stateMachine.SetEvent((int)theEvent);
-    }
-
-    public int GetState() 
-    {
-        return stateMachine.GetState();
+        StartMachine();
+        RelationsBegin();
+        SetEvent((int)Events.FallUngrounded);
     }
 }
