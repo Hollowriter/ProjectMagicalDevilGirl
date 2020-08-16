@@ -24,12 +24,6 @@ public class PlayerCombo : BasicStates
         StopCombo
     }
 
-    void StartMachine() 
-    {
-        stateMachine = new StateMachine();
-        stateMachine.Init(7, 5);
-    }
-
     void FirstComboRelations() 
     {
         stateMachine.SetRelation((int)ComboStates.None, (int)ComboEvents.LandPunch, (int)ComboStates.FirstPunch);
@@ -72,9 +66,14 @@ public class PlayerCombo : BasicStates
         EndCombo();
     }
 
+    protected override void Begin()
+    {
+        StartMachine(7, 5);
+        RelationsBegin();
+    }
+
     private void Awake()
     {
-        StartMachine();
-        RelationsBegin();
+        Begin();
     }
 }

@@ -36,12 +36,6 @@ public class PlayerStates : BasicStates
         StopPunch
     }
 
-    void StartMachine() 
-    {
-        stateMachine = new StateMachine();
-        stateMachine.Init(14, 10);
-    }
-
     void WalkRelations() 
     {
         stateMachine.SetRelation((int)States.Idle, (int)Events.WalkLeft, (int)States.WalkingLeft);
@@ -98,10 +92,15 @@ public class PlayerStates : BasicStates
         AttackRelations();
     }
 
-    private void Awake()
+    protected override void Begin()
     {
-        StartMachine();
+        StartMachine(14, 10);
         RelationsBegin();
         SetEvent((int)Events.FallUngrounded);
+    }
+
+    private void Awake()
+    {
+        Begin();
     }
 }
