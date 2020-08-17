@@ -39,7 +39,6 @@ public class PlayerWalk : SingletonBase<PlayerWalk>
             PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickRight)
         {
             newPlayerPositionX += characterSpeed * Time.deltaTime;
-            ApplyMovement();
             SetDirection(true);
         }
     }
@@ -52,7 +51,6 @@ public class PlayerWalk : SingletonBase<PlayerWalk>
             PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickLeft)
         {
             newPlayerPositionX -= characterSpeed * Time.deltaTime;
-            ApplyMovement();
             SetDirection(false);
         }
     }
@@ -67,6 +65,7 @@ public class PlayerWalk : SingletonBase<PlayerWalk>
         newPlayerPositionX = PlayerPosition.instance.GetPlayerPositionX();
         WalkLeft();
         WalkRight();
+        ApplyMovement();
     }
 
     protected override void BehaveSingleton()

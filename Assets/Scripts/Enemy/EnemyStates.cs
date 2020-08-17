@@ -10,6 +10,7 @@ public class EnemyStates : BasicStates
         GoingToPlayer,
         AttackingPlayer,
         Retreating,
+        Jumping,
         FallingFromFloor,
         Damaged,
         Falling,
@@ -23,6 +24,8 @@ public class EnemyStates : BasicStates
     {
         PlayerDetected,
         Attack,
+        Jump,
+        StopJump,
         Retreat,
         StopRetreat,
         NoFloor,
@@ -38,6 +41,7 @@ public class EnemyStates : BasicStates
     {
         stateMachine.SetRelation((int)BaddieStates.Idle, (int)BaddieEvents.PlayerDetected, (int)BaddieStates.GoingToPlayer);
         stateMachine.SetRelation((int)BaddieStates.GoingToPlayer, (int)BaddieEvents.Attack, (int)BaddieStates.AttackingPlayer);
+        stateMachine.SetRelation((int)BaddieStates.GoingToPlayer, (int)BaddieEvents.Jump, (int)BaddieStates.Jumping);
         stateMachine.SetRelation((int)BaddieStates.AttackingPlayer, (int)BaddieEvents.Retreat, (int)BaddieStates.Retreating);
         stateMachine.SetRelation((int)BaddieStates.Retreating, (int)BaddieEvents.StopRetreat, (int)BaddieStates.GoingToPlayer);
     }
@@ -45,6 +49,8 @@ public class EnemyStates : BasicStates
     void GravityRelations() 
     {
         stateMachine.SetRelation((int)BaddieStates.GoingToPlayer, (int)BaddieEvents.NoFloor, (int)BaddieStates.FallingFromFloor);
+        stateMachine.SetRelation((int)BaddieStates.Retreating, (int)BaddieEvents.NoFloor, (int)BaddieStates.FallingFromFloor);
+        stateMachine.SetRelation((int)BaddieStates.Jumping, (int)BaddieEvents.StopJump, (int)BaddieStates.FallingFromFloor);
         stateMachine.SetRelation((int)BaddieStates.FallingFromFloor, (int)BaddieEvents.Grounded, (int)BaddieStates.GoingToPlayer);
         stateMachine.SetRelation((int)BaddieStates.Falling, (int)BaddieEvents.Grounded, (int)BaddieStates.Down);
         stateMachine.SetRelation((int)BaddieStates.FallingKnocked, (int)BaddieEvents.Grounded, (int)BaddieStates.TKO);
@@ -56,6 +62,7 @@ public class EnemyStates : BasicStates
         stateMachine.SetRelation((int)BaddieStates.GoingToPlayer, (int)BaddieEvents.Hit, (int)BaddieStates.Damaged);
         stateMachine.SetRelation((int)BaddieStates.AttackingPlayer, (int)BaddieEvents.Hit, (int)BaddieStates.Damaged);
         stateMachine.SetRelation((int)BaddieStates.Retreating, (int)BaddieEvents.Hit, (int)BaddieStates.Damaged);
+        stateMachine.SetRelation((int)BaddieStates.Jumping, (int)BaddieEvents.Hit, (int)BaddieStates.Falling);
         stateMachine.SetRelation((int)BaddieStates.FallingFromFloor, (int)BaddieEvents.Hit, (int)BaddieStates.Falling);
     }
 
@@ -86,7 +93,7 @@ public class EnemyStates : BasicStates
 
     protected override void Begin()
     {
-        StartMachine(11, 11);
+        StartMachine(12, 13);
         RelationsBegin();
     }
 }
