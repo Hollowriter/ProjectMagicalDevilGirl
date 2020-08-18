@@ -96,4 +96,9 @@ public class EnemyStates : BasicStates
         StartMachine(12, 13);
         RelationsBegin();
     }
+
+    private void Awake()
+    {
+        Begin();
+    }
 }

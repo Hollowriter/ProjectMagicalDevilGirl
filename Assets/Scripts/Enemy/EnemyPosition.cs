@@ -5,10 +5,13 @@ using UnityEngine;
 public class EnemyPosition : MonoBehaviour
 {
     Vector3 enemyPosition;
+    public float detectPlayerDistance;
+    float distanceFromPlayer;
 
     void Begin() 
     {
         enemyPosition = GetComponent<Transform>().position;
+        distanceFromPlayer = 0;
     }
 
     private void Awake()
@@ -38,6 +41,15 @@ public class EnemyPosition : MonoBehaviour
         SetEnemyPosition(enemyPosition);
     }
 
+    void DistanceEnemyAndPlayer() 
+    {
+        distanceFromPlayer = enemyPosition.x - PlayerPosition.instance.GetPlayerPositionX();
+        if (distanceFromPlayer < 0) 
+        {
+            distanceFromPlayer *= -1;
+        }
+    }
+
     public Vector3 GetEnemyPosition()
     {
         return enemyPosition;
@@ -53,6 +65,15 @@ public class EnemyPosition : MonoBehaviour
         return enemyPosition.y;
     }
 
+    public bool IsPlayerDetected() 
+    {
+        if (distanceFromPlayer <= detectPlayerDistance) 
+        {
+            return true;
+        }
+        return false;
+    }
+
     void UpdatePosition()
     {
         enemyPosition = this.gameObject.GetComponent<Transform>().position;
@@ -61,5 +82,6 @@ public class EnemyPosition : MonoBehaviour
     private void Update()
     {
         UpdatePosition();
+        DistanceEnemyAndPlayer();
     }
 }
