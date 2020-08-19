@@ -40,7 +40,12 @@ public class EnemyBehaviour : MonoBehaviour
 
     void GravityEnemy()
     {
-    	enemyJump.UpdateGravity();
+        if (enemyStates.GetState() == (int)EnemyStates.BaddieStates.FallingFromFloor 
+            || enemyStates.GetState() == (int)EnemyStates.BaddieStates.FallingWhileIdle
+            || enemyStates.GetState() == (int)EnemyStates.BaddieStates.Jumping)
+        {
+            enemyJump.UpdateGravity(enemyStates);
+        }
     }
 
     void Behave() 

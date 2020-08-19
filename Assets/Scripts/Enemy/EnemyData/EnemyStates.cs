@@ -12,6 +12,7 @@ public class EnemyStates : BasicStates
         Retreating,
         Jumping,
         FallingFromFloor,
+        FallingWhileIdle,
         Damaged,
         Falling,
         FallingKnocked,
@@ -48,9 +49,11 @@ public class EnemyStates : BasicStates
 
     void GravityRelations() 
     {
+        stateMachine.SetRelation((int)BaddieStates.Idle, (int)BaddieEvents.NoFloor, (int)BaddieStates.FallingWhileIdle);
         stateMachine.SetRelation((int)BaddieStates.GoingToPlayer, (int)BaddieEvents.NoFloor, (int)BaddieStates.FallingFromFloor);
         stateMachine.SetRelation((int)BaddieStates.Retreating, (int)BaddieEvents.NoFloor, (int)BaddieStates.FallingFromFloor);
         stateMachine.SetRelation((int)BaddieStates.Jumping, (int)BaddieEvents.StopJump, (int)BaddieStates.FallingFromFloor);
+        stateMachine.SetRelation((int)BaddieStates.FallingWhileIdle, (int)BaddieEvents.Grounded, (int)BaddieStates.Idle);
         stateMachine.SetRelation((int)BaddieStates.FallingFromFloor, (int)BaddieEvents.Grounded, (int)BaddieStates.GoingToPlayer);
         stateMachine.SetRelation((int)BaddieStates.Falling, (int)BaddieEvents.Grounded, (int)BaddieStates.Down);
         stateMachine.SetRelation((int)BaddieStates.FallingKnocked, (int)BaddieEvents.Grounded, (int)BaddieStates.TKO);
@@ -93,8 +96,9 @@ public class EnemyStates : BasicStates
 
     protected override void Begin()
     {
-        StartMachine(12, 13);
+        StartMachine(13, 13);
         RelationsBegin();
+        SetEvent((int)BaddieEvents.NoFloor);
     }
 
     private void Awake()

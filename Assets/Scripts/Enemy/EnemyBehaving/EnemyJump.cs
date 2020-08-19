@@ -34,9 +34,13 @@ public class EnemyJump : MonoBehaviour
 		GetComponent<EnemyPosition>().SetEnemyPositionY(jumpPosition);
 	}
 
-	public void UpdateGravity()
+	public void UpdateGravity(EnemyStates _enemyStates)
 	{
-		GravityActing();
+		if (_enemyStates.GetState() == (int)EnemyStates.BaddieStates.FallingFromFloor ||
+			_enemyStates.GetState() == (int)EnemyStates.BaddieStates.FallingWhileIdle)
+		{
+			GravityActing();
+		}
 		ApplyJump();
 	}
 }
