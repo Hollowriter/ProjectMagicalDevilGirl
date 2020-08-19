@@ -7,12 +7,14 @@ public class EnemyBehaviour : MonoBehaviour
     EnemyStates enemyStates;
     EnemyPosition enemyPosition;
     EnemyMove enemyMove;
+    EnemyJump enemyJump;
 
     void Begin() 
     {
         enemyStates = GetComponent<EnemyStates>();
         enemyPosition = GetComponent<EnemyPosition>();
         enemyMove = GetComponent<EnemyMove>();
+        enemyJump = GetComponent<EnemyJump>();
     }
 
     private void Start()
@@ -36,10 +38,16 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    void GravityEnemy()
+    {
+    	enemyJump.UpdateGravity();
+    }
+
     void Behave() 
     {
         DetectPlayer();
         MoveEnemy();
+        GravityEnemy();
     }
 
     private void Update()
