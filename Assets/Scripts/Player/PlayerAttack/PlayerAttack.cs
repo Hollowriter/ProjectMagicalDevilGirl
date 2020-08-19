@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack : SingletonBase<PlayerAttack>
+public class PlayerAttack : SingletonBase<PlayerAttack> // Despues ver de refactorizar esta clase y la del ataque enemigo
 {
     Vector3 attackBoxVector;
     public float attackHorizontalDifference;

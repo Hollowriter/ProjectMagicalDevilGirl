@@ -10,7 +10,6 @@ public class PlayerJump : SingletonBase<PlayerJump>
     [SerializeField]
     float jumpTime;
     float jumpTimer;
-    bool firstJump; // Nota: Remover esto
     float jumpPosition;
 
     protected override void SingletonAwake()
@@ -18,7 +17,6 @@ public class PlayerJump : SingletonBase<PlayerJump>
         base.SingletonAwake();
         jumpPosition = PlayerPosition.instance.GetPlayerPositionY();
         jumpTimer = 0;
-        firstJump = false; // Nota: Remover esto
     }
 
     private void Awake()
@@ -61,7 +59,6 @@ public class PlayerJump : SingletonBase<PlayerJump>
         if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.Idle) 
         {
             jumpTimer = 0;
-            firstJump = false; // Nota: Remover esto
         }
     }
 
