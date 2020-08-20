@@ -16,6 +16,14 @@ public class EnemyCollisions : MonoBehaviour
         Begin();
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "PlayerAttack") 
+        {
+            enemyStates.SetEvent((int)EnemyStates.BaddieEvents.Hit);
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Floor") 

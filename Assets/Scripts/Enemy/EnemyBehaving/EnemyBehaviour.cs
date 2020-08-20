@@ -12,6 +12,7 @@ public class EnemyBehaviour : MonoBehaviour
     float behaviourTimer;
     public float deactivateAttackTime;
     public float deactivateRetreatTime;
+    public float deactivateFlinchingTime;
 
     void Begin() 
     {
@@ -82,6 +83,19 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    void FlinchDamage() 
+    {
+        if (enemyStates.GetState() == (int)EnemyStates.BaddieStates.Damaged) 
+        {
+            behaviourTimer += Time.deltaTime;
+            if (behaviourTimer >= deactivateFlinchingTime) 
+            {
+                enemyStates.SetEvent((int)EnemyStates.BaddieEvents.Recover);
+                behaviourTimer = 0;
+            }
+        }
+    }
+
     void GravityEnemy()
     {
         if (enemyStates.GetState() == (int)EnemyStates.BaddieStates.FallingFromFloor 
@@ -99,6 +113,7 @@ public class EnemyBehaviour : MonoBehaviour
         AttackPlayer();
         TimeAttack();
         Retreat();
+        FlinchDamage();
         GravityEnemy();
     }
 

@@ -543,8 +543,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb5ec5e9889494d4eac5924088937735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deactivateAttackTime: 2
+  deactivateAttackTime: 6
   deactivateRetreatTime: 2
+  deactivateFlinchingTime: 2
 --- !u!4 &398698237
 Transform:
   m_ObjectHideFlags: 0
@@ -648,7 +649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackBox: {fileID: 1112162652}
   attackBoxSpeed: 1
-  attackBoxTime: 4
+  attackBoxTime: 0.5
 --- !u!1 &435519228
 GameObject:
   m_ObjectHideFlags: 0

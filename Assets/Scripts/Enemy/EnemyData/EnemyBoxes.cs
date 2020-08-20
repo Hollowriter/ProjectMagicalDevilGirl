@@ -26,7 +26,7 @@ public class EnemyBoxes : MonoBehaviour
     {
         if (enemyStates.GetState() == (int)EnemyStates.BaddieStates.AttackingPlayer)
         {
-            if (attackBoxTimer <= attackBoxTime)
+            if (attackBoxTimer >= attackBoxTime)
             {
                 if (!attackBox.activeInHierarchy)
                 {
