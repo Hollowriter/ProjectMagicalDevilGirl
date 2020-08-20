@@ -28,7 +28,7 @@ public class EnemyBoxes : MonoBehaviour
         {
             if (attackBoxTimer <= attackBoxTime)
             {
-                if (attackBox.activeInHierarchy)
+                if (!attackBox.activeInHierarchy)
                 {
                     attackBox.SetActive(true);
                 }

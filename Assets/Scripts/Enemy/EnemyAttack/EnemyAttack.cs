@@ -14,15 +14,15 @@ public class EnemyAttack : MonoBehaviour // Despues ver de refactorizar esta cla
 
     void Begin() 
     {
-        enemyPosition = GetComponent<EnemyPosition>();
-        enemyMove = GetComponent<EnemyMove>();
+        enemyPosition = GetComponentInParent<EnemyPosition>();
+        enemyMove = GetComponentInParent<EnemyMove>();
         attackTime = 0;
         attackBoxVector = enemyPosition.GetEnemyPosition();
         directionModifier = 1;
         this.gameObject.SetActive(false);
     }
 
-    private void Awake()
+    private void Start()
     {
         Begin();
     }

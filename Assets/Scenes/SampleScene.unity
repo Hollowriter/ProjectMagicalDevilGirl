@@ -646,7 +646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackBox: {fileID: 1112162652}
   attackBoxSpeed: 1
-  attackBoxTime: 1
+  attackBoxTime: 4
 --- !u!1 &435519228
 GameObject:
   m_ObjectHideFlags: 0
