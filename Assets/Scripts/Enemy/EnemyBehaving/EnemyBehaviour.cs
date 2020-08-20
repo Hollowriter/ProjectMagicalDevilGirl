@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class EnemyBehaviour : MonoBehaviour
     EnemyPosition enemyPosition;
     EnemyMove enemyMove;
     EnemyJump enemyJump;
+    float behaviourTimer;
+    public float deactivateAttackTime;
+    public float deactivateRetreatTime;
 
     void Begin() 
     {
@@ -15,6 +19,7 @@ public class EnemyBehaviour : MonoBehaviour
         enemyPosition = GetComponent<EnemyPosition>();
         enemyMove = GetComponent<EnemyMove>();
         enemyJump = GetComponent<EnemyJump>();
+        behaviourTimer = 0;
     }
 
     private void Start()
@@ -50,6 +55,33 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    void TimeAttack() 
+    {
+        if (enemyStates.GetState() == (int)EnemyStates.BaddieStates.AttackingPlayer) 
+        {
+            behaviourTimer += Time.deltaTime;
+            if (behaviourTimer >= deactivateAttackTime)
+            {
+                enemyStates.SetEvent((int)EnemyStates.BaddieEvents.Retreat);
+                behaviourTimer = 0;
+            }
+        }
+    }
+
+    void Retreat() 
+    {
+        if (enemyStates.GetState() == (int)EnemyStates.BaddieStates.Retreating) 
+        {
+            behaviourTimer += Time.deltaTime;
+            enemyMove.UpdateRetreat();
+            if (behaviourTimer >= deactivateRetreatTime)
+            {
+                enemyStates.SetEvent((int)EnemyStates.BaddieEvents.StopRetreat);
+                behaviourTimer = 0;
+            }
+        }
+    }
+
     void GravityEnemy()
     {
         if (enemyStates.GetState() == (int)EnemyStates.BaddieStates.FallingFromFloor 
@@ -65,6 +97,8 @@ public class EnemyBehaviour : MonoBehaviour
         DetectPlayer();
         MoveEnemy();
         AttackPlayer();
+        TimeAttack();
+        Retreat();
         GravityEnemy();
     }
 

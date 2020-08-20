@@ -50,6 +50,24 @@ public class EnemyMove : MonoBehaviour
         }
     }
 
+    void RetreatRight()
+    {
+        if (enemyPosition.GetEnemyPositionX() < PlayerPosition.instance.GetPlayerPositionX())
+        {
+            newEnemyPositionX -= enemySpeed * Time.deltaTime;
+            SetDirection(true);
+        }
+    }
+
+    void RetreatLeft()
+    {
+        if (enemyPosition.GetEnemyPositionX() > PlayerPosition.instance.GetPlayerPositionX())
+        {
+            newEnemyPositionX += enemySpeed * Time.deltaTime;
+            SetDirection(false);
+        }
+    }
+
     void ApplyMovement() 
     {
         enemyPosition.SetEnemyPositionX(newEnemyPositionX);
@@ -60,6 +78,14 @@ public class EnemyMove : MonoBehaviour
         newEnemyPositionX = enemyPosition.GetEnemyPositionX();
         MoveLeft();
         MoveRight();
+        ApplyMovement();
+    }
+
+    public void UpdateRetreat() 
+    {
+        newEnemyPositionX = enemyPosition.GetEnemyPositionX();
+        RetreatLeft();
+        RetreatRight();
         ApplyMovement();
     }
 }

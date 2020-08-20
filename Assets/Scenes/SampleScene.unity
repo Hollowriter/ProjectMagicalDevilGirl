@@ -543,6 +543,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb5ec5e9889494d4eac5924088937735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deactivateAttackTime: 2
+  deactivateRetreatTime: 2
 --- !u!4 &398698237
 Transform:
   m_ObjectHideFlags: 0
