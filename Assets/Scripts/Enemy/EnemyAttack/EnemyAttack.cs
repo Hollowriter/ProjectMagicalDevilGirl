@@ -9,7 +9,6 @@ public class EnemyAttack : MonoBehaviour // Despues ver de refactorizar esta cla
     Vector3 attackBoxVector;
     public float attackHorizontalDifference;
     public float attackVerticalDifference;
-    public float attackDuration; // Esto va a ser reemplazado por animacion tarde o temprano.
     float attackTime;
     int directionModifier;
 
@@ -43,5 +42,16 @@ public class EnemyAttack : MonoBehaviour // Despues ver de refactorizar esta cla
         attackBoxVector.x = enemyPosition.GetEnemyPosition().x + attackHorizontalDifference * directionModifier;
         attackBoxVector.y = enemyPosition.GetEnemyPosition().y + attackVerticalDifference;
         this.gameObject.transform.position = attackBoxVector;
-    } // Pendiente de terminar
+    }
+
+    void Behave() 
+    {
+        CheckDirection();
+        Punch();
+    }
+
+    private void Update()
+    {
+        Behave();
+    }
 }

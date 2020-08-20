@@ -38,6 +38,18 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    void AttackPlayer() 
+    {
+        if (enemyPosition.ShouldBeAttacking()) 
+        {
+            enemyStates.SetEvent((int)EnemyStates.BaddieEvents.Attack);
+        }
+        else 
+        {
+            enemyStates.SetEvent((int)EnemyStates.BaddieEvents.StopAttack);
+        }
+    }
+
     void GravityEnemy()
     {
         if (enemyStates.GetState() == (int)EnemyStates.BaddieStates.FallingFromFloor 
@@ -52,6 +64,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         DetectPlayer();
         MoveEnemy();
+        AttackPlayer();
         GravityEnemy();
     }
 

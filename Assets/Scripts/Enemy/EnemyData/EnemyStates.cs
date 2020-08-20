@@ -25,6 +25,7 @@ public class EnemyStates : BasicStates
     {
         PlayerDetected,
         Attack,
+        StopAttack,
         Jump,
         StopJump,
         Retreat,
@@ -42,6 +43,7 @@ public class EnemyStates : BasicStates
     {
         stateMachine.SetRelation((int)BaddieStates.Idle, (int)BaddieEvents.PlayerDetected, (int)BaddieStates.GoingToPlayer);
         stateMachine.SetRelation((int)BaddieStates.GoingToPlayer, (int)BaddieEvents.Attack, (int)BaddieStates.AttackingPlayer);
+        stateMachine.SetRelation((int)BaddieStates.AttackingPlayer, (int)BaddieEvents.StopAttack, (int)BaddieStates.GoingToPlayer);
         stateMachine.SetRelation((int)BaddieStates.GoingToPlayer, (int)BaddieEvents.Jump, (int)BaddieStates.Jumping);
         stateMachine.SetRelation((int)BaddieStates.AttackingPlayer, (int)BaddieEvents.Retreat, (int)BaddieStates.Retreating);
         stateMachine.SetRelation((int)BaddieStates.Retreating, (int)BaddieEvents.StopRetreat, (int)BaddieStates.GoingToPlayer);
@@ -96,7 +98,7 @@ public class EnemyStates : BasicStates
 
     protected override void Begin()
     {
-        StartMachine(13, 13);
+        StartMachine(13, 14);
         RelationsBegin();
         SetEvent((int)BaddieEvents.NoFloor);
     }

@@ -6,6 +6,7 @@ public class EnemyPosition : MonoBehaviour
 {
     Vector3 enemyPosition;
     public float detectPlayerDistance;
+    public float attackPlayerDistance;
     float distanceFromPlayer;
 
     void Begin() 
@@ -68,6 +69,15 @@ public class EnemyPosition : MonoBehaviour
     public bool IsPlayerDetected() 
     {
         if (distanceFromPlayer <= detectPlayerDistance) 
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool ShouldBeAttacking() 
+    {
+        if (distanceFromPlayer <= attackPlayerDistance) 
         {
             return true;
         }
