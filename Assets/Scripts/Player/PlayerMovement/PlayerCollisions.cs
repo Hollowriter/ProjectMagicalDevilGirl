@@ -14,6 +14,15 @@ public class PlayerCollisions : SingletonBase<PlayerCollisions>
         SingletonAwake();
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "EnemyAttack") 
+        {
+            PlayerMachines.instance.GetPlayerStateMachine().SetEvent((int)PlayerStates.Events.Hit);
+            PlayerMachines.instance.GetComboMachine().SetEvent((int)PlayerCombo.ComboEvents.StopCombo);
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Floor") 
