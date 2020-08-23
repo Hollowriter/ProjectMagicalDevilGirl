@@ -13,6 +13,7 @@ public class EnemyBehaviour : MonoBehaviour
     public float deactivateAttackTime;
     public float deactivateRetreatTime;
     public float deactivateFlinchingTime;
+    public float standUpTime;
 
     void Begin() 
     {
@@ -96,6 +97,23 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    void StandingUp() 
+    {
+        if (enemyStates.GetState() == (int)EnemyStates.BaddieStates.Down) 
+        {
+            behaviourTimer += Time.deltaTime;
+            if (behaviourTimer >= standUpTime) 
+            {
+                enemyStates.SetEvent((int)EnemyStates.BaddieEvents.Recover);
+                behaviourTimer = 0;
+            }
+        }
+        if (enemyStates.GetState() == (int)EnemyStates.BaddieStates.Standing) 
+        {
+            enemyStates.SetEvent((int)EnemyStates.BaddieEvents.Stand);
+        }
+    }
+
     void GravityEnemy()
     {
         if (enemyStates.GetState() == (int)EnemyStates.BaddieStates.FallingFromFloor 
@@ -114,6 +132,7 @@ public class EnemyBehaviour : MonoBehaviour
         TimeAttack();
         Retreat();
         FlinchDamage();
+        StandingUp();
         GravityEnemy();
     }
 

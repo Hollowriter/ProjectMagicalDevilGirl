@@ -71,6 +71,16 @@ public class EnemyStates : BasicStates
         stateMachine.SetRelation((int)BaddieStates.FallingFromFloor, (int)BaddieEvents.Hit, (int)BaddieStates.Falling);
     }
 
+    void GettingStrongHitRelations() 
+    {
+        stateMachine.SetRelation((int)BaddieStates.Idle, (int)BaddieEvents.Fall, (int)BaddieStates.Falling);
+        stateMachine.SetRelation((int)BaddieStates.GoingToPlayer, (int)BaddieEvents.Fall, (int)BaddieStates.Falling);
+        stateMachine.SetRelation((int)BaddieStates.AttackingPlayer, (int)BaddieEvents.Fall, (int)BaddieStates.Falling);
+        stateMachine.SetRelation((int)BaddieStates.Retreating, (int)BaddieEvents.Fall, (int)BaddieStates.Falling);
+        stateMachine.SetRelation((int)BaddieStates.Jumping, (int)BaddieEvents.Fall, (int)BaddieStates.Falling);
+        stateMachine.SetRelation((int)BaddieStates.FallingFromFloor, (int)BaddieEvents.Fall, (int)BaddieStates.Falling);
+    }
+
     void GettingKnockedRelations() 
     {
         stateMachine.SetRelation((int)BaddieStates.Idle, (int)BaddieEvents.KnockedOut, (int)BaddieStates.FallingKnocked);
@@ -92,6 +102,7 @@ public class EnemyStates : BasicStates
         BaseRelations();
         GravityRelations();
         GettingHitRelations();
+        GettingStrongHitRelations();
         GettingKnockedRelations();
         RecoveringRelations();
     }

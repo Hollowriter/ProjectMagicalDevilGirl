@@ -20,6 +20,14 @@ public class EnemyCollisions : MonoBehaviour
     {
         if (collision.gameObject.tag == "PlayerAttack") 
         {
+            if (PlayerMachines.instance.GetComboMachine().GetState() == (int)PlayerCombo.ComboStates.ThirdPunch ||
+                PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickIdle ||
+                PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickLeft ||
+                PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickRight) 
+            {
+                enemyStates.SetEvent((int)EnemyStates.BaddieEvents.Fall);
+                return;
+            }
             enemyStates.SetEvent((int)EnemyStates.BaddieEvents.Hit);
         }
     }
