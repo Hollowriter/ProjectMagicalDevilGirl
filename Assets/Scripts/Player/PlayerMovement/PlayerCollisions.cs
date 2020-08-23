@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class PlayerCollisions : SingletonBase<PlayerCollisions>
 {
-    protected override void SingletonAwake()
-    {
-        base.SingletonAwake();
-    }
-
     private void Awake()
     {
         SingletonAwake();

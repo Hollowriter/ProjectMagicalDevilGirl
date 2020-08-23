@@ -72,7 +72,7 @@ public class PlayerStates : BasicStates
         stateMachine.SetRelation((int)States.AirKickIdle, (int)Events.Landed, (int)States.Idle);
         stateMachine.SetRelation((int)States.AirKickLeft, (int)Events.Landed, (int)States.Idle);
         stateMachine.SetRelation((int)States.AirKickRight, (int)Events.Landed, (int)States.Idle);
-        // stateMachine.SetRelation((int)States.FallDamaged, (int)Events.Landed, (int)States.OnFloor);
+        stateMachine.SetRelation((int)States.FallDamaged, (int)Events.Landed, (int)States.OnFloor);
     }
 
     void AttackRelations() 
@@ -99,12 +99,12 @@ public class PlayerStates : BasicStates
         stateMachine.SetRelation((int)States.WalkingRight, (int)Events.Hit, (int)States.Damaged);
         stateMachine.SetRelation((int)States.Punching, (int)Events.Hit, (int)States.Damaged);
         stateMachine.SetRelation((int)States.ConnectedPunching, (int)Events.Hit, (int)States.Damaged);
-        /*stateMachine.SetRelation((int)States.JumpIdle, (int)Events.Hit, (int)States.FallDamaged);
+        stateMachine.SetRelation((int)States.JumpIdle, (int)Events.Hit, (int)States.FallDamaged);
         stateMachine.SetRelation((int)States.JumpLeft, (int)Events.Hit, (int)States.FallDamaged);
         stateMachine.SetRelation((int)States.JumpRight, (int)Events.Hit, (int)States.FallDamaged);
         stateMachine.SetRelation((int)States.FallIdle, (int)Events.Hit, (int)States.FallDamaged);
         stateMachine.SetRelation((int)States.FallLeft, (int)Events.Hit, (int)States.FallDamaged);
-        stateMachine.SetRelation((int)States.FallRight, (int)Events.Hit, (int)States.FallDamaged);*/
+        stateMachine.SetRelation((int)States.FallRight, (int)Events.Hit, (int)States.FallDamaged);
     }
 
     void RecoveringRelations() 
