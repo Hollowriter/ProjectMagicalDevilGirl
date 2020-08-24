@@ -986,6 +986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78fa37c4a820fdd498bc368443075fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 5
   attackHorizontalDifference: 2
   attackVerticalDifference: 1
 --- !u!1 &1176775860
@@ -1010,6 +1011,7 @@ GameObject:
   - component: {fileID: 1176775862}
   - component: {fileID: 1176775873}
   - component: {fileID: 1176775874}
+  - component: {fileID: 1176775875}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1219,6 +1221,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recoverTime: 1
   standTime: 3
+  dissappearTime: 0
+--- !u!114 &1176775875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176775860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d193a096bbafe47acc5d465cf84653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
 --- !u!1 &1293534559
 GameObject:
   m_ObjectHideFlags: 0

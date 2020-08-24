@@ -13,6 +13,11 @@ public class PlayerCollisions : SingletonBase<PlayerCollisions>
     {
         if (collision.gameObject.tag == "EnemyAttack") 
         {
+            if (!(PlayerMachines.instance.GetPlayerStateMachine().GetState() != (int)PlayerStates.States.Damaged) &&
+                !(PlayerMachines.instance.GetPlayerStateMachine().GetState() != (int)PlayerStates.States.FallDamaged)) 
+            {
+                PlayerHealth.instance.SetHealth(PlayerHealth.instance.GetHealth() - collision.gameObject.GetComponent<EnemyAttack>().GetAttackDamage());
+            }
             PlayerMachines.instance.GetPlayerStateMachine().SetEvent((int)PlayerStates.Events.Hit);
             PlayerMachines.instance.GetComboMachine().SetEvent((int)PlayerCombo.ComboEvents.StopCombo);
         }

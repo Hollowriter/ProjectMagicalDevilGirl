@@ -6,6 +6,7 @@ public class PlayerRecoverer : SingletonBase<PlayerRecoverer> // Esto probableme
 {
     public float recoverTime;
     public float standTime;
+    public float dissappearTime;
     float recoverTimer;
 
     protected override void SingletonAwake()
@@ -49,10 +50,24 @@ public class PlayerRecoverer : SingletonBase<PlayerRecoverer> // Esto probableme
         }
     }
 
+    void KnockAndDestroy() 
+    {
+        if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.TKO) 
+        {
+            recoverTimer += Time.deltaTime;
+            if (recoverTimer >= dissappearTime) 
+            {
+                recoverTimer = 0;
+                Destroy(gameObject);
+            }
+        }
+    }
+
     protected override void BehaveSingleton()
     {
         RecoverFromHit();
         StandUp();
+        KnockAndDestroy();
     }
 
     private void Update()

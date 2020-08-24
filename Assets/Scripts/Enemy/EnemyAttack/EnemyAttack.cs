@@ -7,6 +7,7 @@ public class EnemyAttack : MonoBehaviour // Despues ver de refactorizar esta cla
     EnemyPosition enemyPosition;
     EnemyMove enemyMove;
     Vector3 attackBoxVector;
+    public int attackDamage;
     public float attackHorizontalDifference;
     public float attackVerticalDifference;
     float attackTime;
@@ -42,6 +43,11 @@ public class EnemyAttack : MonoBehaviour // Despues ver de refactorizar esta cla
         attackBoxVector.x = enemyPosition.GetEnemyPosition().x + attackHorizontalDifference * directionModifier;
         attackBoxVector.y = enemyPosition.GetEnemyPosition().y + attackVerticalDifference;
         this.gameObject.transform.position = attackBoxVector;
+    }
+
+    public int GetAttackDamage() 
+    {
+        return attackDamage;
     }
 
     void Behave() 

@@ -23,7 +23,9 @@ public class PlayerStates : BasicStates
         Damaged,
         FallDamaged,
         Recovering,
-        OnFloor
+        OnFloor,
+        FallKnocked,
+        TKO
     }
 
     public enum Events 
@@ -40,7 +42,8 @@ public class PlayerStates : BasicStates
         StopPunch,
         Hit,
         Recover,
-        Stand
+        Stand,
+        KnockedOut
     }
 
     void WalkRelations() 
@@ -73,6 +76,7 @@ public class PlayerStates : BasicStates
         stateMachine.SetRelation((int)States.AirKickLeft, (int)Events.Landed, (int)States.Idle);
         stateMachine.SetRelation((int)States.AirKickRight, (int)Events.Landed, (int)States.Idle);
         stateMachine.SetRelation((int)States.FallDamaged, (int)Events.Landed, (int)States.OnFloor);
+        stateMachine.SetRelation((int)States.FallKnocked, (int)Events.Landed, (int)States.TKO);
     }
 
     void AttackRelations() 
@@ -114,6 +118,21 @@ public class PlayerStates : BasicStates
         stateMachine.SetRelation((int)States.Recovering, (int)Events.Stand, (int)States.Idle);
     }
 
+    void KORelations() 
+    {
+        stateMachine.SetRelation((int)States.Idle, (int)Events.KnockedOut, (int)States.FallKnocked);
+        stateMachine.SetRelation((int)States.WalkingLeft, (int)Events.KnockedOut, (int)States.FallKnocked);
+        stateMachine.SetRelation((int)States.WalkingRight, (int)Events.KnockedOut, (int)States.FallKnocked);
+        stateMachine.SetRelation((int)States.Punching, (int)Events.KnockedOut, (int)States.FallKnocked);
+        stateMachine.SetRelation((int)States.ConnectedPunching, (int)Events.KnockedOut, (int)States.FallKnocked);
+        stateMachine.SetRelation((int)States.JumpIdle, (int)Events.KnockedOut, (int)States.FallKnocked);
+        stateMachine.SetRelation((int)States.JumpLeft, (int)Events.KnockedOut, (int)States.FallKnocked);
+        stateMachine.SetRelation((int)States.JumpRight, (int)Events.KnockedOut, (int)States.FallKnocked);
+        stateMachine.SetRelation((int)States.FallIdle, (int)Events.KnockedOut, (int)States.FallKnocked);
+        stateMachine.SetRelation((int)States.FallLeft, (int)Events.KnockedOut, (int)States.FallKnocked);
+        stateMachine.SetRelation((int)States.FallRight, (int)Events.KnockedOut, (int)States.FallKnocked);
+    }
+
     protected override void RelationsBegin() 
     {
         WalkRelations();
@@ -122,11 +141,12 @@ public class PlayerStates : BasicStates
         AttackRelations();
         DamageRelations();
         RecoveringRelations();
+        KORelations();
     }
 
     protected override void Begin()
     {
-        StartMachine(18, 13);
+        StartMachine(20, 14);
         RelationsBegin();
         SetEvent((int)Events.FallUngrounded);
     }
