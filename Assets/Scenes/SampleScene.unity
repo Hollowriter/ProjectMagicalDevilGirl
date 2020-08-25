@@ -489,6 +489,7 @@ GameObject:
   - component: {fileID: 398698240}
   - component: {fileID: 398698241}
   - component: {fileID: 398698242}
+  - component: {fileID: 398698243}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -551,6 +552,7 @@ MonoBehaviour:
   deactivateRetreatTime: 2
   deactivateFlinchingTime: 2
   standUpTime: 4
+  dissappearTime: 2
 --- !u!4 &398698237
 Transform:
   m_ObjectHideFlags: 0
@@ -655,6 +657,19 @@ MonoBehaviour:
   attackBox: {fileID: 1112162652}
   attackBoxSpeed: 1
   attackBoxTime: 0.5
+--- !u!114 &398698243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398698232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d1be94f743094244979f7e26b130717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 15
 --- !u!1 &435519228
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,7 +1001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78fa37c4a820fdd498bc368443075fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 5
+  attackDamage: 1
   attackHorizontalDifference: 2
   attackVerticalDifference: 1
 --- !u!1 &1176775860
@@ -1234,7 +1249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d193a096bbafe47acc5d465cf84653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 80
 --- !u!1 &1293534559
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,6 +1568,7 @@ MonoBehaviour:
   attackHorizontalDifference: 2
   attackVerticalDifference: 1
   attackDuration: 0.5
+  attackDamage: 5
 --- !u!50 &2131475531
 Rigidbody2D:
   serializedVersion: 4

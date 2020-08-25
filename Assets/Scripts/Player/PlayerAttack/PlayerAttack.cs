@@ -8,6 +8,7 @@ public class PlayerAttack : SingletonBase<PlayerAttack> // Despues ver de refact
     public float attackHorizontalDifference;
     public float attackVerticalDifference;
     public float attackDuration; // Esto va a ser reemplazado por animacion tarde o temprano.
+    public int attackDamage;
     float attackTime;
     int directionModifier;
 
@@ -81,6 +82,11 @@ public class PlayerAttack : SingletonBase<PlayerAttack> // Despues ver de refact
         {
             this.gameObject.SetActive(false);
         }
+    }
+
+    public int GetAttackDamage() 
+    {
+        return attackDamage;
     }
 
     protected override void BehaveSingleton()

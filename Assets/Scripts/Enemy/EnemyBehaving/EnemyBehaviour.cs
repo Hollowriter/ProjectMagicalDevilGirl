@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class EnemyBehaviour : MonoBehaviour
+public class EnemyBehaviour : MonoBehaviour // NOTA: REFACTORIZA ESTO CUANDO TERMINES LO BASICO, HOLLOW!
 {
     EnemyStates enemyStates;
     EnemyPosition enemyPosition;
     EnemyMove enemyMove;
     EnemyJump enemyJump;
+    EnemyHealth enemyHealth;
     float behaviourTimer;
     public float deactivateAttackTime;
     public float deactivateRetreatTime;
     public float deactivateFlinchingTime;
     public float standUpTime;
+    public float dissappearTime;
 
     void Begin() 
     {
@@ -21,6 +23,7 @@ public class EnemyBehaviour : MonoBehaviour
         enemyPosition = GetComponent<EnemyPosition>();
         enemyMove = GetComponent<EnemyMove>();
         enemyJump = GetComponent<EnemyJump>();
+        enemyHealth = GetComponent<EnemyHealth>();
         behaviourTimer = 0;
     }
 
@@ -114,11 +117,32 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    void CheckIfDead() 
+    {
+        if (enemyHealth.GetHealth() <= 0) 
+        {
+            enemyStates.SetEvent((int)EnemyStates.BaddieEvents.KnockedOut);
+        }
+    }
+
+    void MakeEnemyDissappear() 
+    {
+        if (enemyStates.GetState() == (int)EnemyStates.BaddieStates.TKO) 
+        {
+            behaviourTimer += Time.deltaTime;
+            if (behaviourTimer >= dissappearTime) 
+            {
+                this.gameObject.SetActive(false);
+            }
+        }
+    }
+
     void GravityEnemy()
     {
         if (enemyStates.GetState() == (int)EnemyStates.BaddieStates.FallingFromFloor 
             || enemyStates.GetState() == (int)EnemyStates.BaddieStates.FallingWhileIdle
-            || enemyStates.GetState() == (int)EnemyStates.BaddieStates.Jumping)
+            || enemyStates.GetState() == (int)EnemyStates.BaddieStates.Jumping
+            || enemyStates.GetState() == (int)EnemyStates.BaddieStates.FallingKnocked)
         {
             enemyJump.UpdateGravity(enemyStates);
         }
@@ -133,6 +157,8 @@ public class EnemyBehaviour : MonoBehaviour
         Retreat();
         FlinchDamage();
         StandingUp();
+        CheckIfDead();
+        MakeEnemyDissappear();
         GravityEnemy();
     }
 

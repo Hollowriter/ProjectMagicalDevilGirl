@@ -20,6 +20,12 @@ public class EnemyCollisions : MonoBehaviour
     {
         if (collision.gameObject.tag == "PlayerAttack") 
         {
+            if (enemyStates.GetState() != (int)EnemyStates.BaddieStates.Damaged &&
+                enemyStates.GetState() != (int)EnemyStates.BaddieStates.Falling &&
+                enemyStates.GetState() != (int)EnemyStates.BaddieStates.Down) 
+            {
+                this.gameObject.GetComponent<EnemyHealth>().SetHealth(this.gameObject.GetComponent<EnemyHealth>().GetHealth() - PlayerAttack.instance.GetAttackDamage());
+            }
             if (PlayerMachines.instance.GetComboMachine().GetState() == (int)PlayerCombo.ComboStates.ThirdPunch ||
                 PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickIdle ||
                 PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickLeft ||
