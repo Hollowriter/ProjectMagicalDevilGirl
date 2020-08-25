@@ -58,7 +58,7 @@ public class PlayerRecoverer : SingletonBase<PlayerRecoverer> // Esto probableme
             if (recoverTimer >= dissappearTime) 
             {
                 recoverTimer = 0;
-                Destroy(gameObject);
+                this.gameObject.SetActive(false);
             }
         }
     }

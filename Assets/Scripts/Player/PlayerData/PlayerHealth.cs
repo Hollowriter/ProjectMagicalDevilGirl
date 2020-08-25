@@ -32,7 +32,7 @@ public class PlayerHealth : SingletonBase<PlayerHealth>
     {
         if (health <= 0) 
         {
-            PlayerMachines.instance.GetPlayerStateMachine().SetEvent((int)PlayerStates.Events.KnockedOut); // PENDIENTE DE QUE SE MUERA EL PERSONAJE
+            PlayerMachines.instance.GetPlayerStateMachine().SetEvent((int)PlayerStates.Events.KnockedOut);
         }
     }
 

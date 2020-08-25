@@ -13,8 +13,8 @@ public class PlayerCollisions : SingletonBase<PlayerCollisions>
     {
         if (collision.gameObject.tag == "EnemyAttack") 
         {
-            if (!(PlayerMachines.instance.GetPlayerStateMachine().GetState() != (int)PlayerStates.States.Damaged) &&
-                !(PlayerMachines.instance.GetPlayerStateMachine().GetState() != (int)PlayerStates.States.FallDamaged)) 
+            if ((PlayerMachines.instance.GetPlayerStateMachine().GetState() != (int)PlayerStates.States.Damaged) &&
+                (PlayerMachines.instance.GetPlayerStateMachine().GetState() != (int)PlayerStates.States.FallDamaged)) 
             {
                 PlayerHealth.instance.SetHealth(PlayerHealth.instance.GetHealth() - collision.gameObject.GetComponent<EnemyAttack>().GetAttackDamage());
             }
