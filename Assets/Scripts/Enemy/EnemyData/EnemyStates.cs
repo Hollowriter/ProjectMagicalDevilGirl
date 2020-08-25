@@ -83,11 +83,12 @@ public class EnemyStates : BasicStates
 
     void GettingKnockedRelations() 
     {
-        stateMachine.SetRelation((int)BaddieStates.Idle, (int)BaddieEvents.KnockedOut, (int)BaddieStates.FallingKnocked);
-        stateMachine.SetRelation((int)BaddieStates.GoingToPlayer, (int)BaddieEvents.KnockedOut, (int)BaddieStates.FallingKnocked);
-        stateMachine.SetRelation((int)BaddieStates.AttackingPlayer, (int)BaddieEvents.KnockedOut, (int)BaddieStates.FallingKnocked);
-        stateMachine.SetRelation((int)BaddieStates.Retreating, (int)BaddieEvents.KnockedOut, (int)BaddieStates.FallingKnocked);
+        stateMachine.SetRelation((int)BaddieStates.Idle, (int)BaddieEvents.KnockedOut, (int)BaddieStates.TKO);
+        stateMachine.SetRelation((int)BaddieStates.GoingToPlayer, (int)BaddieEvents.KnockedOut, (int)BaddieStates.TKO);
+        stateMachine.SetRelation((int)BaddieStates.AttackingPlayer, (int)BaddieEvents.KnockedOut, (int)BaddieStates.TKO);
+        stateMachine.SetRelation((int)BaddieStates.Retreating, (int)BaddieEvents.KnockedOut, (int)BaddieStates.TKO);
         stateMachine.SetRelation((int)BaddieStates.FallingFromFloor, (int)BaddieEvents.KnockedOut, (int)BaddieStates.FallingKnocked);
+        stateMachine.SetRelation((int)BaddieStates.Falling, (int)BaddieEvents.KnockedOut, (int)BaddieStates.FallingKnocked);
     }
 
     void RecoveringRelations() 
