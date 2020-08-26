@@ -1,18 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class HealthUI : MonoBehaviour
+public class HealthUI : SingletonBase<HealthUI>
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    Slider playerHealthSlider;
+
+    protected override void SingletonAwake()
     {
-        
+        base.SingletonAwake();
+        playerHealthSlider.maxValue = PlayerHealth.instance.maxHealth;
+        playerHealthSlider.value = PlayerHealth.instance.maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        SingletonAwake();
+    }
+
+    protected override void BehaveSingleton()
+    {
+        playerHealthSlider.value = PlayerHealth.instance.GetHealth();
+    }
+
+    private void Update()
+    {
+        BehaveSingleton();
     }
 }
