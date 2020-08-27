@@ -796,7 +796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e968c9361ffba9e4192701569f5ca70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deactivateFlinchingTime: 2
+  deactivateFlinchingTime: 0.5
   standUpTime: 4
 --- !u!114 &398698247
 MonoBehaviour:
