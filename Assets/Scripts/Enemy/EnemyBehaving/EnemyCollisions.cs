@@ -25,6 +25,7 @@ public class EnemyCollisions : MonoBehaviour
                 enemyStates.GetState() != (int)EnemyStates.BaddieStates.Down) 
             {
                 this.gameObject.GetComponent<EnemyHealth>().SetHealth(this.gameObject.GetComponent<EnemyHealth>().GetHealth() - PlayerAttack.instance.GetAttackDamage());
+                HealthUI.instance.SetEnemyHealthSlider(this.gameObject.GetComponent<EnemyHealth>().maxHealth, this.gameObject.GetComponent<EnemyHealth>().GetHealth());
             }
             if (PlayerMachines.instance.GetComboMachine().GetState() == (int)PlayerCombo.ComboStates.ThirdPunch ||
                 PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickIdle ||
