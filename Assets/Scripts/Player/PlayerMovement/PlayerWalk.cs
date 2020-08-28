@@ -38,7 +38,8 @@ public class PlayerWalk : SingletonBase<PlayerWalk>
             PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.FallRight ||
             PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickRight)
         {
-            newPlayerPositionX += characterSpeed * Time.deltaTime;
+            if (PlayerPosition.instance.GetPlayerPositionX() < AreaConstraints.instance.RightStageLimit)
+                newPlayerPositionX += characterSpeed * Time.deltaTime;
             SetDirection(true);
         }
     }
@@ -50,7 +51,8 @@ public class PlayerWalk : SingletonBase<PlayerWalk>
             PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.FallLeft ||
             PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickLeft)
         {
-            newPlayerPositionX -= characterSpeed * Time.deltaTime;
+            if (PlayerPosition.instance.GetPlayerPositionX() > AreaConstraints.instance.LeftStageLimit)
+                newPlayerPositionX -= characterSpeed * Time.deltaTime;
             SetDirection(false);
         }
     }

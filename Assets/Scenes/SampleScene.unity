@@ -1139,7 +1139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f96b3281b1ac124d9a665778c76d8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftStageLimit: -100
+  LeftStageLimit: -10
   RightStageLimit: 100
   TopStageLimit: 100
   BottomStageLimit: -100
