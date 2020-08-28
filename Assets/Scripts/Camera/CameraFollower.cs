@@ -74,7 +74,7 @@ public class CameraFollower : SingletonBase<CameraFollower>
         {
             moveVector.y += cameraTranslationSpeed * Time.deltaTime;
         }
-        moveVector.y = Mathf.Clamp(moveVector.y, leftConstraint, rightConstraint);
+        moveVector.y = Mathf.Clamp(moveVector.y, bottomConstraint, topConstraint);
     }
 
     void Follow()
