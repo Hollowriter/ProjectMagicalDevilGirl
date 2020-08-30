@@ -56,10 +56,12 @@ public class CameraFollower : SingletonBase<CameraFollower>
         if (playerOnScreen.x < playerCameraLimitLeft) 
         {
             moveVector.x -= cameraTranslationSpeed * Time.deltaTime;
+            RealTimeConstrainer.instance.RightConstrain();
         }
         else if (playerOnScreen.x > playerCameraLimitRight) 
         {
             moveVector.x += cameraTranslationSpeed * Time.deltaTime;
+            RealTimeConstrainer.instance.LeftConstrain();
         }
         moveVector.x = Mathf.Clamp(moveVector.x, leftConstraint, rightConstraint);
     }
