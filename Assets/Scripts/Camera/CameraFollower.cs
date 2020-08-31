@@ -25,7 +25,7 @@ public class CameraFollower : SingletonBase<CameraFollower>
         leftConstraint = AreaConstraints.instance.LeftStageLimit + camHorzExtent;
         rightConstraint = AreaConstraints.instance.RightStageLimit - camHorzExtent;
         topConstraint = AreaConstraints.instance.TopStageLimit - camVertExtent;
-        bottomConstraint = AreaConstraints.instance.BottomStageLimit - camVertExtent;
+        bottomConstraint = AreaConstraints.instance.BottomStageLimit + camVertExtent;
     }
 
     protected override void SingletonAwake()
