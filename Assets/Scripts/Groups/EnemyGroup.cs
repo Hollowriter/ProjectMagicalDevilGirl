@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyGroup : MonoBehaviour // PENDIENTE DE TESTEAR
+public class EnemyGroup : MonoBehaviour
 {
     public List<GameObject> enemies;
     int enemiesDefeated;
+    bool activated;
 
     void DeactivateAll() 
     {
@@ -19,6 +20,7 @@ public class EnemyGroup : MonoBehaviour // PENDIENTE DE TESTEAR
     {
         DeactivateAll();
         enemiesDefeated = 0;
+        activated = false;
     }
 
     private void Start()
@@ -32,6 +34,7 @@ public class EnemyGroup : MonoBehaviour // PENDIENTE DE TESTEAR
         {
             enemies[i].SetActive(true);
         }
+        activated = true;
     }
 
     public bool CheckAllEnemiesDefeated() 
@@ -49,5 +52,10 @@ public class EnemyGroup : MonoBehaviour // PENDIENTE DE TESTEAR
             return true;
         }
         return false;
+    }
+
+    public bool GetActivated() 
+    {
+        return activated;
     }
 }

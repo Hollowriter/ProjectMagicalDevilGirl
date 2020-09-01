@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PhaseController : SingletonBase<PhaseController> // PENDIENTE DE TERMINAR
+public class PhaseController : SingletonBase<PhaseController>
 {
     public List<GameObject> groupsOfEnemies;
     public int deconstrainPhase;
@@ -21,7 +21,7 @@ public class PhaseController : SingletonBase<PhaseController> // PENDIENTE DE TE
 
     void CheckPhase() 
     {
-        if (currentPhase <= groupsOfEnemies.Count)
+        if (currentPhase < groupsOfEnemies.Count)
         {
             if (groupsOfEnemies[currentPhase].GetComponent<EnemyGroup>().CheckAllEnemiesDefeated())
             {

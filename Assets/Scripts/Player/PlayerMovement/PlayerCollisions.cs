@@ -22,6 +22,14 @@ public class PlayerCollisions : SingletonBase<PlayerCollisions>
             PlayerMachines.instance.GetPlayerStateMachine().SetEvent((int)PlayerStates.Events.Hit);
             PlayerMachines.instance.GetComboMachine().SetEvent((int)PlayerCombo.ComboEvents.StopCombo);
         }
+
+        if (collision.gameObject.tag == "EnemyGroupSwitch") 
+        {
+            if (!collision.gameObject.GetComponent<EnemyGroup>().GetActivated()) 
+            {
+                collision.gameObject.GetComponent<EnemyGroup>().ActivateEnemies();
+            }
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
