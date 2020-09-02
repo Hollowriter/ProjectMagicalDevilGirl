@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9068751937384116511}
   - component: {fileID: 9068751937384116508}
-  - component: {fileID: 9068751937384116509}
+  - component: {fileID: 2487162522370324594}
   m_Layer: 0
   m_Name: EnemyPunch
   m_TagString: EnemyAttack
@@ -59,7 +59,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.8898932, y: 1.7275076}
   m_EdgeRadius: 0
---- !u!114 &9068751937384116509
+--- !u!114 &2487162522370324594
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,10 +68,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 9068751937384116510}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78fa37c4a820fdd498bc368443075fbd, type: 3}
+  m_Script: {fileID: 11500000, guid: db109eb1bfaed424580f7c623ddac243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 1
+  attackDamage: 3
   attackHorizontalDifference: 2
   attackVerticalDifference: 1
 --- !u!1 &9068751938096699066

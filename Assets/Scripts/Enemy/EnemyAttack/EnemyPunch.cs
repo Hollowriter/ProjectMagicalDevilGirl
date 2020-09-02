@@ -1,0 +1,23 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EnemyPunch : EnemyAttack
+{
+    private void Start()
+    {
+        Begin();
+    }
+
+    protected override void Attack()
+    {
+        attackBoxVector.x = enemyPosition.GetEnemyPosition().x + attackHorizontalDifference * directionModifier;
+        attackBoxVector.y = enemyPosition.GetEnemyPosition().y + attackVerticalDifference;
+        this.gameObject.transform.position = attackBoxVector;
+    }
+
+    private void Update()
+    {
+        Behave();
+    }
+}

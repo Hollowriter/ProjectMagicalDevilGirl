@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour // Despues ver de refactorizar esta clase y la del ataque del jugador
 {
-    EnemyPosition enemyPosition;
-    EnemyMove enemyMove;
-    Vector3 attackBoxVector;
+    protected EnemyPosition enemyPosition;
+    protected EnemyMove enemyMove;
+    protected Vector3 attackBoxVector;
     public int attackDamage;
     public float attackHorizontalDifference;
     public float attackVerticalDifference;
-    float attackTime;
-    int directionModifier;
+    protected float attackTime;
+    protected int directionModifier;
 
-    void Begin() 
+    protected void Begin() 
     {
         enemyPosition = GetComponentInParent<EnemyPosition>();
         enemyMove = GetComponentInParent<EnemyMove>();
@@ -23,10 +23,10 @@ public class EnemyAttack : MonoBehaviour // Despues ver de refactorizar esta cla
         this.gameObject.SetActive(false);
     }
 
-    private void Start()
+    /*private void Start()
     {
         Begin();
-    }
+    }*/
 
     void CheckDirection() 
     {
@@ -38,11 +38,11 @@ public class EnemyAttack : MonoBehaviour // Despues ver de refactorizar esta cla
         directionModifier = 1;
     }
 
-    void Punch() 
+    protected virtual void Attack() 
     {
-        attackBoxVector.x = enemyPosition.GetEnemyPosition().x + attackHorizontalDifference * directionModifier;
+        /*attackBoxVector.x = enemyPosition.GetEnemyPosition().x + attackHorizontalDifference * directionModifier;
         attackBoxVector.y = enemyPosition.GetEnemyPosition().y + attackVerticalDifference;
-        this.gameObject.transform.position = attackBoxVector;
+        this.gameObject.transform.position = attackBoxVector;*/
     }
 
     public int GetAttackDamage() 
@@ -50,14 +50,14 @@ public class EnemyAttack : MonoBehaviour // Despues ver de refactorizar esta cla
         return attackDamage;
     }
 
-    void Behave() 
+    protected void Behave() 
     {
         CheckDirection();
-        Punch();
+        Attack();
     }
 
-    private void Update()
+    /*private void Update()
     {
         Behave();
-    }
+    }*/
 }
