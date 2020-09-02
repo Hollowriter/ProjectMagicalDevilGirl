@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttack : MonoBehaviour // Despues ver de refactorizar esta clase y la del ataque del jugador
+public class EnemyAttack : MonoBehaviour
 {
     protected EnemyPosition enemyPosition;
     protected EnemyMove enemyMove;
@@ -10,23 +10,16 @@ public class EnemyAttack : MonoBehaviour // Despues ver de refactorizar esta cla
     public int attackDamage;
     public float attackHorizontalDifference;
     public float attackVerticalDifference;
-    protected float attackTime;
     protected int directionModifier;
 
-    protected void Begin() 
+    protected virtual void BeginAttack() 
     {
         enemyPosition = GetComponentInParent<EnemyPosition>();
         enemyMove = GetComponentInParent<EnemyMove>();
-        attackTime = 0;
         attackBoxVector = enemyPosition.GetEnemyPosition();
         directionModifier = 1;
         this.gameObject.SetActive(false);
     }
-
-    /*private void Start()
-    {
-        Begin();
-    }*/
 
     void CheckDirection() 
     {
@@ -40,9 +33,6 @@ public class EnemyAttack : MonoBehaviour // Despues ver de refactorizar esta cla
 
     protected virtual void Attack() 
     {
-        /*attackBoxVector.x = enemyPosition.GetEnemyPosition().x + attackHorizontalDifference * directionModifier;
-        attackBoxVector.y = enemyPosition.GetEnemyPosition().y + attackVerticalDifference;
-        this.gameObject.transform.position = attackBoxVector;*/
     }
 
     public int GetAttackDamage() 
@@ -50,14 +40,9 @@ public class EnemyAttack : MonoBehaviour // Despues ver de refactorizar esta cla
         return attackDamage;
     }
 
-    protected void Behave() 
+    protected virtual void BehaveAttack() 
     {
         CheckDirection();
         Attack();
     }
-
-    /*private void Update()
-    {
-        Behave();
-    }*/
 }

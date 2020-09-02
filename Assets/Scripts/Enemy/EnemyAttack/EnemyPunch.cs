@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class EnemyPunch : EnemyAttack
 {
+    protected override void BeginAttack()
+    {
+        base.BeginAttack();
+    }
+
     private void Start()
     {
-        Begin();
+        BeginAttack();
     }
 
     protected override void Attack()
@@ -18,6 +23,6 @@ public class EnemyPunch : EnemyAttack
 
     private void Update()
     {
-        Behave();
+        BehaveAttack();
     }
 }
