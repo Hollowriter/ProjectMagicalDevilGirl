@@ -45,9 +45,18 @@ public class EnemyBoxes : MonoBehaviour
         attackBox.SetActive(false);
     }
 
+    void CheckAttackBoxTimer() 
+    {
+        if (attackBox.GetComponent<EnemyThrow>() != null) 
+        {
+            attackBox.GetComponent<EnemyThrow>().SetAttackTimer(attackBoxTimer);
+        }
+    }
+
     void Behave() 
     {
         AttackBox();
+        CheckAttackBoxTimer();
     }
 
     private void Update()

@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyThrow : EnemyAttack // NOTA: Agregarle un script the colisiones a este tipo de ataque
 {
     float attackTimer;
-    public float attackTime;
 
     protected override void BeginAttack()
     {
@@ -25,7 +24,7 @@ public class EnemyThrow : EnemyAttack // NOTA: Agregarle un script the colisione
         this.gameObject.transform.position = attackBoxVector;
     }
 
-    void TimeControl() 
+    /*void TimeControl() 
     {
         attackTimer += Time.deltaTime;
         if (attackTimer >= attackTime) 
@@ -33,12 +32,22 @@ public class EnemyThrow : EnemyAttack // NOTA: Agregarle un script the colisione
             attackTimer = 0;
             this.gameObject.SetActive(false);
         }
+    }*/
+
+    public void SetAttackTimer(float _attackTimer) 
+    {
+        attackTimer = _attackTimer;
+    }
+
+    public float GetAttackTimer() 
+    {
+        return attackTimer;
     }
 
     protected override void BehaveAttack()
     {
         base.BehaveAttack();
-        TimeControl();
+        // TimeControl();
     }
 
     private void Update()
