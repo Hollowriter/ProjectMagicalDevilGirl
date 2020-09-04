@@ -24,7 +24,7 @@ public class EnemyBoxes : MonoBehaviour
 
     void AttackBox() 
     {
-        if (enemyStates.GetState() == (int)EnemyStates.BaddieStates.AttackingPlayer)
+        if (enemyStates.GetState() == (int)EnemyStates.BaddieStates.AttackingPlayer) // Nota: Crear un behaviour aparte para las piedras
         {
             if (attackBoxTimer >= attackBoxTime)
             {
