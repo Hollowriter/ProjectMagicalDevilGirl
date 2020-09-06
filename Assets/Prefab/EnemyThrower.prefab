@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 8289939383971357270}
   - component: {fileID: 8289939383971357269}
   - component: {fileID: 8289939383971357268}
-  - component: {fileID: -8548612019862054171}
+  - component: {fileID: 6078758384696192250}
   m_Layer: 0
   m_Name: EnemyThrower
   m_TagString: Enemy
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dissappearTime: 2
---- !u!114 &-8548612019862054171
+--- !u!114 &6078758384696192250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -433,12 +433,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8289939383971357608}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0851fc21a6a91914b99f5cbdc0d8e201, type: 3}
+  m_Script: {fileID: 11500000, guid: a42752bb872d2a5498eb99f14146ae0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackBox: {fileID: 8289939384701797388}
   attackBoxSpeed: 3
-  attackBoxTime: 5
+  attackBoxTime: 6
 --- !u!1 &8289939384701797388
 GameObject:
   m_ObjectHideFlags: 0
