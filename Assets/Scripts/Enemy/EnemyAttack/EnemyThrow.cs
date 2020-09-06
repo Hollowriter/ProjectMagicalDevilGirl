@@ -34,11 +34,6 @@ public class EnemyThrow : EnemyAttack
         return attackTimer;
     }
 
-    protected override void BehaveAttack()
-    {
-        base.BehaveAttack();
-    }
-
     private void Update()
     {
         BehaveAttack();

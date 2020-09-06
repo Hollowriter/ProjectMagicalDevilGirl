@@ -2242,20 +2242,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 701577150}
     m_Modifications:
-    - target: {fileID: 8289939383971357266, guid: 59c504f510766814dbeb2c3d9a6402a3,
-        type: 3}
-      propertyPath: attackBoxTime
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8289939383971357266, guid: 59c504f510766814dbeb2c3d9a6402a3,
-        type: 3}
-      propertyPath: attackBoxSpeed
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 8289939383971357272, guid: 59c504f510766814dbeb2c3d9a6402a3,
         type: 3}
       propertyPath: deactivateAttackTime
-      value: 15
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8289939383971357608, guid: 59c504f510766814dbeb2c3d9a6402a3,
         type: 3}

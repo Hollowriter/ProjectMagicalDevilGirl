@@ -91,7 +91,6 @@ GameObject:
   - component: {fileID: 9068751938096699069}
   - component: {fileID: 9068751938096699202}
   - component: {fileID: 9068751938096699203}
-  - component: {fileID: 9068751938096699200}
   - component: {fileID: 9068751938096699201}
   - component: {fileID: 9068751938096699211}
   - component: {fileID: 9068751938096699210}
@@ -99,6 +98,7 @@ GameObject:
   - component: {fileID: 9068751938096699204}
   - component: {fileID: 9068751938096699207}
   - component: {fileID: 9068751938096699206}
+  - component: {fileID: 9112664643837924560}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -246,21 +246,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &9068751938096699200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9068751938096699066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08c92de8143e1a04f96785eaa2349318, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackBox: {fileID: 9068751937384116510}
-  attackBoxSpeed: 1
-  attackBoxTime: 0.5
 --- !u!114 &9068751938096699201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,6 +336,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dissappearTime: 2
+--- !u!114 &9112664643837924560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9068751938096699066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0851fc21a6a91914b99f5cbdc0d8e201, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackBox: {fileID: 9068751937384116510}
+  attackBoxSpeed: 2
+  attackBoxTime: 3
 --- !u!1 &9068751938190434547
 GameObject:
   m_ObjectHideFlags: 0
