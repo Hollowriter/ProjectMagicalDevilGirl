@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCombo : BasicStates
+public class PlayerCombo : BasicStates // NOTA: El puño pesado esta en proceso, TERMINALO!
 {
     public enum ComboStates 
     {
@@ -12,7 +12,9 @@ public class PlayerCombo : BasicStates
         WaitSecondPunch,
         SecondPunch,
         WaitThirdPunch,
-        ThirdPunch
+        ThirdPunch,
+        HeavyPunch,
+        HeavyLanded
     }
 
     public enum ComboEvents 
@@ -29,6 +31,7 @@ public class PlayerCombo : BasicStates
         stateMachine.SetRelation((int)ComboStates.None, (int)ComboEvents.LandPunch, (int)ComboStates.FirstPunch);
         stateMachine.SetRelation((int)ComboStates.WaitSecondPunch, (int)ComboEvents.LandPunch, (int)ComboStates.SecondPunch);
         stateMachine.SetRelation((int)ComboStates.WaitThirdPunch, (int)ComboEvents.LandPunch, (int)ComboStates.ThirdPunch);
+        stateMachine.SetRelation((int)ComboStates.HeavyPunch, (int)ComboEvents.LandPunch, (int)ComboStates.HeavyLanded);
     }
 
     void WaitCombo() 
@@ -68,7 +71,7 @@ public class PlayerCombo : BasicStates
 
     protected override void Begin()
     {
-        StartMachine(7, 5);
+        StartMachine(9, 5);
         RelationsBegin();
     }
 
