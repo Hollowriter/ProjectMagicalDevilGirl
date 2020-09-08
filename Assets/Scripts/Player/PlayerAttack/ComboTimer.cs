@@ -26,7 +26,8 @@ public class ComboTimer : SingletonBase<ComboTimer>
             return;
         }
         if (PlayerMachines.instance.GetComboMachine().GetState() == (int)PlayerCombo.ComboStates.WaitSecondPunch ||
-            PlayerMachines.instance.GetComboMachine().GetState() == (int)PlayerCombo.ComboStates.WaitThirdPunch) 
+            PlayerMachines.instance.GetComboMachine().GetState() == (int)PlayerCombo.ComboStates.WaitThirdPunch ||
+            PlayerMachines.instance.GetComboMachine().GetState() == (int)PlayerCombo.ComboStates.HeavyPunch) 
         {
             timer += Time.deltaTime;
             if (timer >= maxComboTime) 

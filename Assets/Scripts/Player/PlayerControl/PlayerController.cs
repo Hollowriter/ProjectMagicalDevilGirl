@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlayerController : SingletonBase<PlayerController>
 {
     bool attackPressed;
+    bool heavyAttackPressed;
     bool jumpPressed;
 
     protected override void SingletonAwake()
     {
         base.SingletonAwake();
         attackPressed = false;
+        heavyAttackPressed = false;
         jumpPressed = false;
     }
 
@@ -53,6 +55,15 @@ public class PlayerController : SingletonBase<PlayerController>
         }
     }
 
+    void PressedHeavyAttack() 
+    {
+        if (Input.GetKey(InputManager.instance.heavyAttack) && !heavyAttackPressed) 
+        {
+            PlayerMachines.instance.GetPlayerStateMachine().SetEvent((int)PlayerStates.Events.HeavyPunch);
+            heavyAttackPressed = true;
+        }
+    }
+
     void StopPressing() 
     {
         if (Input.GetKeyUp(InputManager.instance.walkLeft) || Input.GetKeyUp(InputManager.instance.walkRight)) 
@@ -62,6 +73,10 @@ public class PlayerController : SingletonBase<PlayerController>
         if (Input.GetKeyUp(InputManager.instance.attack)) 
         {
             attackPressed = false;
+        }
+        if (Input.GetKeyUp(InputManager.instance.heavyAttack)) 
+        {
+            heavyAttackPressed = false;
         }
         if (Input.GetKeyUp(InputManager.instance.jump)) 
         {
@@ -77,6 +92,7 @@ public class PlayerController : SingletonBase<PlayerController>
             PressedRight();
             PressedJump();
             PressedAttack();
+            PressedHeavyAttack();
         }
         StopPressing();
     }

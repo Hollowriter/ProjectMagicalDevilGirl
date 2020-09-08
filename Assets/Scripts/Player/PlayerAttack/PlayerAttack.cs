@@ -38,7 +38,8 @@ public class PlayerAttack : SingletonBase<PlayerAttack> // Despues ver de refact
 
     void Punch() 
     {
-        if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.Punching || PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.ConnectedPunching)
+        if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.Punching || PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.ConnectedPunching
+            || PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.HeavyPunching || PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.ConnectedHeavyPunching)
         {
             attackBoxVector.x = PlayerPosition.instance.GetPlayerPosition().x + attackHorizontalDifference * directionModifier;
             attackBoxVector.y = PlayerPosition.instance.GetPlayerPosition().y + attackVerticalDifference;
@@ -60,7 +61,8 @@ public class PlayerAttack : SingletonBase<PlayerAttack> // Despues ver de refact
 
     void CheckAttackTime() 
     {
-        if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.Punching || PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.ConnectedPunching)
+        if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.Punching || PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.ConnectedPunching
+            || PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.HeavyPunching || PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.ConnectedHeavyPunching)
         {
             attackTime += Time.deltaTime;
             if (attackTime >= attackDuration) 
@@ -76,6 +78,8 @@ public class PlayerAttack : SingletonBase<PlayerAttack> // Despues ver de refact
     {
         if (!(PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.Punching) && 
             !(PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.ConnectedPunching) &&
+            !(PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.HeavyPunching) &&
+            !(PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.ConnectedHeavyPunching) &&
             !(PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickIdle) &&
             !(PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickLeft) &&
             !(PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickRight)) 

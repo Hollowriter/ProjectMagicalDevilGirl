@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCombo : BasicStates // NOTA: El puño pesado esta en proceso, TERMINALO!
+public class PlayerCombo : BasicStates
 {
     public enum ComboStates 
     {
@@ -13,28 +13,34 @@ public class PlayerCombo : BasicStates // NOTA: El puño pesado esta en proceso,
         SecondPunch,
         WaitThirdPunch,
         ThirdPunch,
-        HeavyPunch,
-        HeavyLanded
+        HeavyPunch
     }
 
     public enum ComboEvents 
     {
         LandPunch,
+        HeavyLand,
         WaitCombo,
         OnAir,
         Grounded,
         StopCombo
     }
 
-    void FirstComboRelations() 
+    void FirstComboRelations()
     {
         stateMachine.SetRelation((int)ComboStates.None, (int)ComboEvents.LandPunch, (int)ComboStates.FirstPunch);
         stateMachine.SetRelation((int)ComboStates.WaitSecondPunch, (int)ComboEvents.LandPunch, (int)ComboStates.SecondPunch);
         stateMachine.SetRelation((int)ComboStates.WaitThirdPunch, (int)ComboEvents.LandPunch, (int)ComboStates.ThirdPunch);
-        stateMachine.SetRelation((int)ComboStates.HeavyPunch, (int)ComboEvents.LandPunch, (int)ComboStates.HeavyLanded);
     }
 
-    void WaitCombo() 
+    void HeavyComboRelations()
+    {
+        stateMachine.SetRelation((int)ComboStates.None, (int)ComboEvents.HeavyLand, (int)ComboStates.HeavyPunch);
+        stateMachine.SetRelation((int)ComboStates.WaitSecondPunch, (int)ComboEvents.HeavyLand, (int)ComboStates.HeavyPunch);
+        stateMachine.SetRelation((int)ComboStates.WaitThirdPunch, (int)ComboEvents.HeavyLand, (int)ComboStates.HeavyPunch);
+    }
+
+    void WaitCombo()
     {
         stateMachine.SetRelation((int)ComboStates.FirstPunch, (int)ComboEvents.WaitCombo, (int)ComboStates.WaitSecondPunch);
         stateMachine.SetRelation((int)ComboStates.SecondPunch, (int)ComboEvents.WaitCombo, (int)ComboStates.WaitThirdPunch);
@@ -47,6 +53,7 @@ public class PlayerCombo : BasicStates // NOTA: El puño pesado esta en proceso,
         stateMachine.SetRelation((int)ComboStates.ThirdPunch, (int)ComboEvents.StopCombo, (int)ComboStates.None);
         stateMachine.SetRelation((int)ComboStates.WaitSecondPunch, (int)ComboEvents.StopCombo, (int)ComboStates.None);
         stateMachine.SetRelation((int)ComboStates.WaitThirdPunch, (int)ComboEvents.StopCombo, (int)ComboStates.None);
+        stateMachine.SetRelation((int)ComboStates.HeavyPunch, (int)ComboEvents.StopCombo, (int)ComboStates.None);
     }
 
     void AirRelations() 
@@ -63,6 +70,7 @@ public class PlayerCombo : BasicStates // NOTA: El puño pesado esta en proceso,
     protected override void RelationsBegin() 
     {
         FirstComboRelations();
+        HeavyComboRelations();
         WaitCombo();
         CancelCombo();
         AirRelations();
@@ -71,7 +79,7 @@ public class PlayerCombo : BasicStates // NOTA: El puño pesado esta en proceso,
 
     protected override void Begin()
     {
-        StartMachine(9, 5);
+        StartMachine(8, 6);
         RelationsBegin();
     }
 

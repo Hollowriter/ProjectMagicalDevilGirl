@@ -13,10 +13,18 @@ public class AttackCollisions : SingletonBase<AttackCollisions>
     {
         if (collision.gameObject.tag == "Enemy") 
         {
-            if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.Punching) 
+            if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.Punching || 
+                PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.HeavyPunching) 
             {
                 PlayerMachines.instance.GetPlayerStateMachine().SetEvent((int)PlayerStates.Events.LandPunch);
-                PlayerMachines.instance.GetComboMachine().SetEvent((int)PlayerCombo.ComboEvents.LandPunch);
+                if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.Punching)
+                {
+                    PlayerMachines.instance.GetComboMachine().SetEvent((int)PlayerCombo.ComboEvents.LandPunch);
+                }
+                else 
+                {
+                    PlayerMachines.instance.GetComboMachine().SetEvent((int)PlayerCombo.ComboEvents.HeavyLand);
+                }
             }
         }
     }

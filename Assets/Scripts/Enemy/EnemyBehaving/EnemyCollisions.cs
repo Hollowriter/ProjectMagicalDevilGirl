@@ -29,6 +29,7 @@ public class EnemyCollisions : MonoBehaviour
                 HealthUI.instance.SetEnemyName(this.gameObject.name);
             }
             if (PlayerMachines.instance.GetComboMachine().GetState() == (int)PlayerCombo.ComboStates.ThirdPunch ||
+                PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.HeavyPunching ||
                 PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickIdle ||
                 PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickLeft ||
                 PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickRight) 

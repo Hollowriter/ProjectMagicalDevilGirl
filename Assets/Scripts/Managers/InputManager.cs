@@ -8,6 +8,7 @@ public class InputManager : SingletonBase<InputManager>
     public KeyCode walkRight { get; set; }
     public KeyCode jump { get; set; }
     public KeyCode attack { get; set; }
+    public KeyCode heavyAttack { get; set; }
 
     public bool inputDetected()
     {
@@ -23,6 +24,7 @@ public class InputManager : SingletonBase<InputManager>
         walkRight = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("rightKey", "D"));
         jump = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("jumpKey", "Space"));
         attack = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("attackKey", "J"));
+        heavyAttack = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("heavyAttackKey", "K"));
     }
 
     void Awake()
