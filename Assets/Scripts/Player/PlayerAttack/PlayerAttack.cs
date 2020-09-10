@@ -28,12 +28,15 @@ public class PlayerAttack : SingletonBase<PlayerAttack> // Despues ver de refact
 
     void CheckDirection() 
     {
-        if (!PlayerWalk.instance.GetDirection()) 
+        if (PlayerBoxes.instance.AttackBoxIsActive())
         {
-            directionModifier = -1;
-            return;
+            if (!PlayerWalk.instance.GetDirection())
+            {
+                directionModifier = -1;
+                return;
+            }
+            directionModifier = 1;
         }
-        directionModifier = 1;
     }
 
     void Punch() 

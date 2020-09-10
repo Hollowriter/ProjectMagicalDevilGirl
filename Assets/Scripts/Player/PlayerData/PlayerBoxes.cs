@@ -25,6 +25,11 @@ public class PlayerBoxes : SingletonBase<PlayerBoxes>
         }
     }
 
+    public bool AttackBoxIsActive() 
+    {
+        return attackBox.activeInHierarchy;
+    }
+
     protected override void BehaveSingleton()
     {
         AttackBox();
