@@ -16,7 +16,6 @@ public class AttackCollisions : SingletonBase<AttackCollisions>
             if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.Punching || 
                 PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.HeavyPunching) 
             {
-                PlayerMachines.instance.GetPlayerStateMachine().SetEvent((int)PlayerStates.Events.LandPunch);
                 if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.Punching)
                 {
                     PlayerMachines.instance.GetComboMachine().SetEvent((int)PlayerCombo.ComboEvents.LandPunch);
@@ -25,6 +24,7 @@ public class AttackCollisions : SingletonBase<AttackCollisions>
                 {
                     PlayerMachines.instance.GetComboMachine().SetEvent((int)PlayerCombo.ComboEvents.HeavyLand);
                 }
+                PlayerMachines.instance.GetPlayerStateMachine().SetEvent((int)PlayerStates.Events.LandPunch);
             }
         }
     }
