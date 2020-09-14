@@ -25,7 +25,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if (!enemyMove.GetDirection()) 
         {
-            directionModifier *= -1;
+            directionModifier = -1;
             return;
         }
         directionModifier = 1;
