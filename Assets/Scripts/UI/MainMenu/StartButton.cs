@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartButton : MonoBehaviour
+public class StartButton : SingletonBase<StartButton>
 {
+    private void Awake()
+    {
+        SingletonAwake();
+    }
+
     public void PressStart()
     {
         SceneManager.LoadScene("Bank");

@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExitButton : MonoBehaviour
+public class ExitButton : SingletonBase<ExitButton>
 {
+    private void Awake()
+    {
+        SingletonAwake();
+    }
+
     public void PressExit() 
     {
         Application.Quit();
