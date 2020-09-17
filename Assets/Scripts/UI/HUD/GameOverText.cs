@@ -2,7 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameOverText : MonoBehaviour
+public class GameOverText : SingletonBase<GameOverText>
 {
-    // Pendiente para la proxima sesion de programacion
+    GameObject gameOverText;
+
+    protected override void SingletonAwake()
+    {
+        base.SingletonAwake();
+        gameOverText = GameObject.Find("/MainUI/TextCollection/GameOverText");
+        gameOverText.SetActive(false);
+    }
+
+    private void Awake()
+    {
+        SingletonAwake();
+    }
+
+    void ActivateGameOver() 
+    {
+        if (!PlayerPosition.instance.gameObject.activeInHierarchy) 
+        {
+            gameOverText.SetActive(true);
+        }
+    }
+
+    protected override void BehaveSingleton()
+    {
+        ActivateGameOver();
+    }
+
+    private void Update()
+    {
+        BehaveSingleton();
+    }
 }
