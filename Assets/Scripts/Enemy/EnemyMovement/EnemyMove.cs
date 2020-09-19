@@ -52,7 +52,7 @@ public class EnemyMove : MonoBehaviour
 
     void RetreatRight()
     {
-        if (enemyPosition.GetEnemyPositionX() < PlayerPosition.instance.GetPlayerPositionX())
+        if (enemyPosition.GetEnemyPositionX() < PlayerPosition.instance.GetPlayerPositionX() && enemyPosition.GetEnemyPositionX() > AreaConstraints.instance.LeftStageLimit)
         {
             newEnemyPositionX -= enemySpeed * Time.deltaTime;
             SetDirection(true);
@@ -61,7 +61,7 @@ public class EnemyMove : MonoBehaviour
 
     void RetreatLeft()
     {
-        if (enemyPosition.GetEnemyPositionX() > PlayerPosition.instance.GetPlayerPositionX())
+        if (enemyPosition.GetEnemyPositionX() > PlayerPosition.instance.GetPlayerPositionX() && enemyPosition.GetEnemyPositionX() < AreaConstraints.instance.RightStageLimit)
         {
             newEnemyPositionX += enemySpeed * Time.deltaTime;
             SetDirection(false);
