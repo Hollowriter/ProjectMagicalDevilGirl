@@ -51,6 +51,16 @@ public class CameraFollower : SingletonBase<CameraFollower>
         return false;
     }
 
+    void UpdateConstraints() 
+    {
+        camVertExtent = this.gameObject.GetComponent<Camera>().orthographicSize;
+        camHorzExtent = this.gameObject.GetComponent<Camera>().aspect * camVertExtent;
+        leftConstraint = AreaConstraints.instance.LeftStageLimit + camHorzExtent;
+        rightConstraint = AreaConstraints.instance.RightStageLimit - camHorzExtent;
+        topConstraint = AreaConstraints.instance.TopStageLimit - camVertExtent;
+        bottomConstraint = AreaConstraints.instance.BottomStageLimit + camVertExtent;
+    }
+
     void FollowX() 
     {
         if (playerOnScreen.x < playerCameraLimitLeft) 
@@ -96,6 +106,7 @@ public class CameraFollower : SingletonBase<CameraFollower>
             FollowX();
             FollowY();
             CallConstrainerX();
+            UpdateConstraints();
         }
         moveVector.z = this.gameObject.transform.position.z;
         transform.position = moveVector;
