@@ -56,12 +56,10 @@ public class CameraFollower : SingletonBase<CameraFollower>
         if (playerOnScreen.x < playerCameraLimitLeft) 
         {
             moveVector.x -= cameraTranslationSpeed * Time.deltaTime;
-            RealTimeConstrainer.instance.RightConstrain();
         }
         else if (playerOnScreen.x > playerCameraLimitRight) 
         {
             moveVector.x += cameraTranslationSpeed * Time.deltaTime;
-            RealTimeConstrainer.instance.LeftConstrain();
         }
         moveVector.x = Mathf.Clamp(moveVector.x, leftConstraint, rightConstraint);
     }
@@ -79,12 +77,25 @@ public class CameraFollower : SingletonBase<CameraFollower>
         moveVector.y = Mathf.Clamp(moveVector.y, bottomConstraint, topConstraint);
     }
 
+    void CallConstrainerX() 
+    {
+        if (playerOnScreen.x < playerCameraLimitLeft && moveVector.x > leftConstraint) 
+        {
+            RealTimeConstrainer.instance.RightConstrain();
+        }
+        else if (playerOnScreen.x > playerCameraLimitRight && moveVector.x < rightConstraint) 
+        {
+            RealTimeConstrainer.instance.LeftConstrain();
+        }
+    }
+
     void Follow()
     {
         if (!CheckIfPlayerIsInCamera()) 
         {
             FollowX();
             FollowY();
+            CallConstrainerX();
         }
         moveVector.z = this.gameObject.transform.position.z;
         transform.position = moveVector;
