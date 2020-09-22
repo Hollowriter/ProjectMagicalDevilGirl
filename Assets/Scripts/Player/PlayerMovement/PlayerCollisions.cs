@@ -36,6 +36,7 @@ public class PlayerCollisions : SingletonBase<PlayerCollisions>
     {
         if (collision.gameObject.tag == "Floor") 
         {
+            PlayerJump.instance.ResetJump();
             PlayerMachines.instance.GetPlayerStateMachine().SetEvent((int)PlayerStates.Events.Landed);
             PlayerMachines.instance.GetComboMachine().SetEvent((int)PlayerCombo.ComboEvents.Grounded);
         }

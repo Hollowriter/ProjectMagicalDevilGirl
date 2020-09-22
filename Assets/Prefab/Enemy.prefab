@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cfe19d072e063147a5f10049f41698b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectPlayerDistance: 4
+  detectPlayerDistance: 20
   attackPlayerDistance: 2
 --- !u!114 &9068751938096699067
 MonoBehaviour:

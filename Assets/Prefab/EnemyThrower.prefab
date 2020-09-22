@@ -247,8 +247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cfe19d072e063147a5f10049f41698b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectPlayerDistance: 4
-  attackPlayerDistance: 4
+  detectPlayerDistance: 20
+  attackPlayerDistance: 5
 --- !u!114 &8289939383971357609
 MonoBehaviour:
   m_ObjectHideFlags: 0

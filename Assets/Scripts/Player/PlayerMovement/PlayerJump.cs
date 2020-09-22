@@ -56,9 +56,16 @@ public class PlayerJump : SingletonBase<PlayerJump>
         }
     }
 
-    void ResetJump() 
+    public void ResetJump() 
     {
-        if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.Idle) 
+        if (PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.FallIdle ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.FallLeft ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.FallRight ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickIdle ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickLeft ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.AirKickRight ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.FallDamaged ||
+            PlayerMachines.instance.GetPlayerStateMachine().GetState() == (int)PlayerStates.States.FallKnocked) 
         {
             jumpTimer = 0;
         }
@@ -74,7 +81,6 @@ public class PlayerJump : SingletonBase<PlayerJump>
         Jump();
         GravityActing();
         ApplyJump();
-        ResetJump();
     }
 
     private void Update()
